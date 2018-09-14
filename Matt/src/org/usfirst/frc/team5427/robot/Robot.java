@@ -16,9 +16,11 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team5427.robot.commands.ExampleCommand;
+
+import org.usfirst.frc.team5427.robot.commands.IntakeIn;
+import org.usfirst.frc.team5427.robot.commands.IntakeOut;
 import org.usfirst.frc.team5427.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team5427.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team5427.robot.subsystems.Intake;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,7 +30,6 @@ import org.usfirst.frc.team5427.robot.subsystems.ExampleSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-	public static final ExampleSubsystem kExampleSubsystem = new ExampleSubsystem();
 	public static OI m_oi;
 
 	Command m_autonomousCommand;
@@ -41,8 +42,12 @@ public class Robot extends TimedRobot {
 	SpeedControllerGroup leftMotors = new SpeedControllerGroup(frontLeft, backLeft);
 	SpeedControllerGroup rightMotors = new SpeedControllerGroup(frontRight, backRight);
 	DifferentialDrive diffDrive = new DifferentialDrive(leftMotors, rightMotors);
+	
+	Talon intakeMotorLeft = new Talon(RobotMap.INTAKE_MOTOR_LEFT);
+	Talon intakeMotorRight = new Talon(RobotMap.INTAKE_MOTOR_RIGHT);
 
 	public static DriveTrain driveTrain;
+	public static Intake intake;
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -51,10 +56,12 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-		m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 		driveTrain = new DriveTrain(diffDrive, leftMotors, rightMotors);
+		intake = new Intake(intakeMotorLeft,intakeMotorRight);
+		m_oi.intake_button_in.whileHeld(new IntakeIn());
+		m_oi.intake_button_out.whileHeld(new IntakeOut());
 	}
 
 	/**

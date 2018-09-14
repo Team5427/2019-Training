@@ -7,7 +7,12 @@
 
 package org.usfirst.frc.team5427.robot;
 
+import org.usfirst.frc.team5427.robot.commands.IntakeIn;
+import org.usfirst.frc.team5427.robot.commands.IntakeOut;
+
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -15,7 +20,8 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class OI {
 	public Joystick joy = new Joystick(RobotMap.JOYSTICK);
-	// Button button = new JoystickButton(stick, buttonNumber);
+	public Button intake_button_in = new JoystickButton(joy, RobotMap.INTAKE_BUTTON_IN);
+	public Button intake_button_out = new JoystickButton(joy, RobotMap.INTAKE_BUTTON_OUT);
 
 	// There are a few additional built in buttons you can use. Additionally,
 	// by subclassing Button you can create custom triggers and bind those to
@@ -32,7 +38,7 @@ public class OI {
 	// Run the command while the button is being held down and interrupt it once
 	// the button is released.
 	// button.whileHeld(new ExampleCommand());
-
+	
 	// Start the command when the button is released and let it run the command
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
