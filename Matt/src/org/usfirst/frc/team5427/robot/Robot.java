@@ -39,7 +39,7 @@ public class Robot extends TimedRobot {
 	Talon backLeft = new Talon(RobotMap.REAR_LEFT_MOTOR);
 	Talon backRight = new Talon(RobotMap.REAR_RIGHT_MOTOR);
 	SpeedControllerGroup leftMotors = new SpeedControllerGroup(frontLeft, backLeft);
-	SpeedControllerGroup rightMotors = new SpeedControllerGroup(frontLeft, backLeft);
+	SpeedControllerGroup rightMotors = new SpeedControllerGroup(frontRight, backRight);
 	DifferentialDrive diffDrive = new DifferentialDrive(leftMotors, rightMotors);
 
 	public static DriveTrain driveTrain;
