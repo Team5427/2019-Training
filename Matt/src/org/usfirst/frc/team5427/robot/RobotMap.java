@@ -23,6 +23,15 @@ public class RobotMap {
 	public static final int INTAKE_MOTOR_RIGHT = 8;
 	
 	public static final int JOYSTICK = 0;
-	public static final int INTAKE_BUTTON_IN = 11;
-	public static final int INTAKE_BUTTON_OUT = 12;
+	public static final int INTAKE_BUTTON_IN = 2;
+	public static final int INTAKE_BUTTON_OUT = 1;
+
+	public static final int ELEVATOR_MOTOR_RIGHT = 9;
+	public static final int ELEVATOR_MOTOR_LEFT = 4;
+	
+	public static final int ELEVATOR_BUTTON_UP = 5;
+	public static final int ELEVATOR_BUTTON_DOWN = 3;
+	
+	public static final int ELEVATOR_LIMIT_SWITCH_UP = 5;
+	public static final int ELEVATOR_LIMIT_SWITCH_DOWN = 4;
 }

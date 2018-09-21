@@ -20,8 +20,12 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	public Joystick joy = new Joystick(RobotMap.JOYSTICK);
+	
 	public Button intake_button_in = new JoystickButton(joy, RobotMap.INTAKE_BUTTON_IN);
 	public Button intake_button_out = new JoystickButton(joy, RobotMap.INTAKE_BUTTON_OUT);
+	
+	public Button elev_button_up = new JoystickButton(joy, RobotMap.ELEVATOR_BUTTON_UP);
+	public Button elev_button_down = new JoystickButton(joy, RobotMap.ELEVATOR_BUTTON_DOWN);
 
 	// There are a few additional built in buttons you can use. Additionally,
 	// by subclassing Button you can create custom triggers and bind those to

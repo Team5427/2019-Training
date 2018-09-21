@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team5427.robot;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
@@ -19,7 +20,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team5427.robot.commands.IntakeIn;
 import org.usfirst.frc.team5427.robot.commands.IntakeOut;
+import org.usfirst.frc.team5427.robot.commands.MoveElev;
+import org.usfirst.frc.team5427.robot.commands.MoveElev.Dir;
 import org.usfirst.frc.team5427.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team5427.robot.subsystems.Elevator;
 import org.usfirst.frc.team5427.robot.subsystems.Intake;
 
 /**
@@ -45,10 +49,19 @@ public class Robot extends TimedRobot {
 	
 	Talon intakeMotorLeft = new Talon(RobotMap.INTAKE_MOTOR_LEFT);
 	Talon intakeMotorRight = new Talon(RobotMap.INTAKE_MOTOR_RIGHT);
+	
+	Talon elevRight = new Talon(RobotMap.ELEVATOR_MOTOR_RIGHT);
+	Talon elevLeft = new Talon(RobotMap.ELEVATOR_MOTOR_LEFT);
+	
+	public static DigitalInput elevLimitUp = new DigitalInput(RobotMap.ELEVATOR_LIMIT_SWITCH_UP);
+	public static DigitalInput elevLimitDown = new DigitalInput(RobotMap.ELEVATOR_LIMIT_SWITCH_DOWN);
 
 	public static DriveTrain driveTrain;
 	public static Intake intake;
-
+	public static Elevator elevator; 
+	
+	
+	
 	/**
 	 * This function is run when the robot is first started up and should be used
 	 * for any initialization code.
@@ -60,8 +73,11 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Auto mode", m_chooser);
 		driveTrain = new DriveTrain(diffDrive, leftMotors, rightMotors);
 		intake = new Intake(intakeMotorLeft,intakeMotorRight);
+		elevator = new Elevator(elevLeft, elevRight);
 		m_oi.intake_button_in.whileHeld(new IntakeIn());
 		m_oi.intake_button_out.whileHeld(new IntakeOut());
+		m_oi.elev_button_up.whileHeld(new MoveElev(Dir.Up));
+		m_oi.elev_button_down.whileHeld(new MoveElev(Dir.Down));
 	}
 
 	/**
