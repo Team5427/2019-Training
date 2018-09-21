@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team5427.robot;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -17,6 +18,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 
+import org.usfirst.frc.team5427.robot.commands.ElevatorDown;
+import org.usfirst.frc.team5427.robot.commands.ElevatorUp;
 import org.usfirst.frc.team5427.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5427.robot.subsystems.Intake;
 import org.usfirst.frc.team5427.util.Config;
@@ -30,25 +33,42 @@ import org.usfirst.frc.team5427.util.Config;
  */
 public class Robot extends IterativeRobot 
 {
-	public static DriveTrain driveTrain;
+	//operator interface
 	public static OI m_oi;
 	
+	//DriveTrain subsystem 
+	public static DriveTrain driveTrain;
+	
+	//SpeedController for front left motor of drive train
 	public static SpeedController motor_pwm_frontLeft;
+	//SpeedController for rear left motor of drive train
 	public static SpeedController motor_pwm_rearLeft;
+	//links together SpeedController frontLeft and rearLeft
 	SpeedControllerGroup speedcontrollergroup_left;
 	
+	//SpeedController for front right motor of drive train
 	public static SpeedController motor_pwm_frontRight;
+	//SpeedController for rear right motor of drive train
 	public static SpeedController motor_pwm_rearRight;
+	//links together SpeedController front and rear right
 	SpeedControllerGroup speedcontrollergroup_right;
 	
 	public DifferentialDrive drive;
 	
-	public static Intake intake;
 	public static SpeedController motorPWM_IntakeLeft;
 	public static SpeedController motorPWM_IntakeRight;
 	
-	Command m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	public static SpeedController motorPWM_ElevatorLeft;
+	public static SpeedController motorPWM_ElevatorRight;
+	
+	public static Intake intake;
+	
+	public static DigitalInput elevatorLimitUp;
+	public static DigitalInput elevatorLimitDown;
+	public static ElevatorUp mou = new ElevatorUp();
+	public static ElevatorDown mod = new ElevatorDown();
+	
+	//Command m_autonomousCommand;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -56,8 +76,9 @@ public class Robot extends IterativeRobot
 	 */
 	@Override
 	public void robotInit() 
-	{
-		m_oi = new OI();
+	{	
+		elevatorLimitUp = new DigitalInput(Config.ELEVATOR_LIMIT_UP);
+		elevatorLimitDown = new DigitalInput(Config.ELEVATOR_LIMIT_DOWN);
 		
 		motor_pwm_frontLeft = new PWMVictorSPX(Config.FRONT_LEFT_MOTOR);
 		motor_pwm_rearLeft = new PWMVictorSPX(Config.REAR_LEFT_MOTOR);
@@ -75,9 +96,12 @@ public class Robot extends IterativeRobot
 		motorPWM_IntakeRight = new PWMVictorSPX(Config.INTAKE_MOTOR_RIGHT);
 		intake = new Intake(motorPWM_IntakeLeft, motorPWM_IntakeRight);
 		
+		motorPWM_ElevatorLeft = new PWMVictorSPX(Config.ELEVATOR_MOTOR_LEFT);
+		motorPWM_ElevatorRight = new PWMVictorSPX(Config.ELEVATOR_MOTOR_RIGHT);
+		
 //		m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", m_chooser);
+		m_oi = new OI();
 	}
 
 	/**
@@ -143,10 +167,10 @@ public class Robot extends IterativeRobot
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (m_autonomousCommand != null) 
+		/*if (m_autonomousCommand != null) 
 		{
 			m_autonomousCommand.cancel();
-		}
+		}*/
 	}
 
 	/**
@@ -156,6 +180,8 @@ public class Robot extends IterativeRobot
 	public void teleopPeriodic() 
 	{
 		Scheduler.getInstance().run();
+		mou.isFinished();
+		mod.isFinished();
 	}
 
 	/**

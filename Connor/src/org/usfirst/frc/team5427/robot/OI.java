@@ -33,6 +33,9 @@ public class OI
 	//buttons
 	Button motorIntakeIn;
 	Button motorIntakeOut;
+	
+	Button elevatorUp;
+	Button elevatorDown;
 
 	// There are a few additional built in buttons you can use. Additionally,
 	// by subclassing Button you can create custom triggers and bind those to
@@ -59,9 +62,13 @@ public class OI
 		joy1 = new Joystick(Config.JOYSTICK_PORT);
 		motorIntakeIn = new JoystickButton(joy1, Config.BUTTON_MOTOR_INTAKE_IN);
 		motorIntakeOut = new JoystickButton(joy1, Config.BUTTON_MOTOR_INTAKE_OUT);
+		elevatorUp = new JoystickButton(joy1, Config.BUTTON_ELEVATOR_UP);
+		elevatorDown = new JoystickButton(joy1, Config.BUTTON_ELEVATOR_DOWN);
 		
 		motorIntakeIn.whenPressed(new IntakeIn());
 		motorIntakeOut.whenPressed(new IntakeOut());
+		elevatorUp.whenPressed(Robot.mou);
+		elevatorDown.whenPressed(Robot.mod);
 		
 	}
 	
