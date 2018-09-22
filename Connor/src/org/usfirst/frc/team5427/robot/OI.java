@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import org.usfirst.frc.team5427.robot.commands.IntakeIn;
 import org.usfirst.frc.team5427.robot.commands.IntakeOut;
+import org.usfirst.frc.team5427.robot.commands.TiltDown;
+import org.usfirst.frc.team5427.robot.commands.TiltUp;
 import org.usfirst.frc.team5427.util.Config;
 
 /**
@@ -36,6 +38,9 @@ public class OI
 	
 	Button elevatorUp;
 	Button elevatorDown;
+	
+	Button tiltUp;
+	Button tiltDown;
 
 	// There are a few additional built in buttons you can use. Additionally,
 	// by subclassing Button you can create custom triggers and bind those to
@@ -64,11 +69,15 @@ public class OI
 		motorIntakeOut = new JoystickButton(joy1, Config.BUTTON_MOTOR_INTAKE_OUT);
 		elevatorUp = new JoystickButton(joy1, Config.BUTTON_ELEVATOR_UP);
 		elevatorDown = new JoystickButton(joy1, Config.BUTTON_ELEVATOR_DOWN);
+		tiltUp = new JoystickButton(joy1, Config.BUTTON_TILT_UP);
+		tiltDown = new JoystickButton(joy1, Config.BUTTON_TILT_DOWN);
 		
 		motorIntakeIn.whenPressed(new IntakeIn());
 		motorIntakeOut.whenPressed(new IntakeOut());
 		elevatorUp.whenPressed(Robot.mou);
 		elevatorDown.whenPressed(Robot.mod);
+		tiltUp.whenPressed(new TiltUp());
+		tiltDown.whenPressed(new TiltDown());
 		
 	}
 	

@@ -29,7 +29,7 @@ public class IntakeIn extends Command
 	@Override
 	protected void end()
 	{
-		Robot.intake.setSpeed(0);
+		Robot.intake.stop();
 	}
 	
 	@Override
@@ -38,7 +38,7 @@ public class IntakeIn extends Command
 		end();
 	}
 	
-	//returns if the button is released
+	//returns true if the button is released
 	@Override
 	protected boolean isFinished() 
 	{
