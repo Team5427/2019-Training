@@ -7,17 +7,42 @@
 
 package org.usfirst.frc.team5427.robot;
 
+//import org.usfirst.frc.team5427.autoCommands.AutoPath;
+//import org.usfirst.frc.team5427.autoCommands.Delayed_Baseline;
+//import org.usfirst.frc.team5427.autoCommands.center.Center_SwitchIsRight;
+//import org.usfirst.frc.team5427.autoCommands.center.Delayed_CSL;
+//import org.usfirst.frc.team5427.autoCommands.center.Delayed_CSR;
+//import org.usfirst.frc.team5427.autoCommands.center.FidgetCL;
+//import org.usfirst.frc.team5427.autoCommands.left.FidgetRSL;
+//import org.usfirst.frc.team5427.autoCommands.left.Left_ScaleIsLeft;
+//import org.usfirst.frc.team5427.autoCommands.left.Left_ScaleIsRight;
+//import org.usfirst.frc.team5427.autoCommands.left.Left_SwitchIsLeft;
+//import org.usfirst.frc.team5427.autoCommands.right.Right_ScaleIsRight;
+//import org.usfirst.frc.team5427.autoCommands.right.Right_SwitchIsRight;
+import org.usfirst.frc.team5427.robot.commands.DriveWithJoystick;
+//import org.usfirst.frc.team5427.robot.commands.MoveElevatorDown;
+//import org.usfirst.frc.team5427.robot.commands.MoveElevatorUp;
+import org.usfirst.frc.team5427.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team5427.robot.subsystems.Intake;
+import org.usfirst.frc.team5427.util.Config;
+//import org.usfirst.frc.team5427.util.SameLine;
+
+//import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.cscore.AxisCamera;
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team5427.robot.commands.ExampleCommand;
-import org.usfirst.frc.team5427.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team5427.robot.subsystems.ExampleSubsystem;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,7 +51,7 @@ import org.usfirst.frc.team5427.robot.subsystems.ExampleSubsystem;
  * creating this project, you must also update the build.properties file in the
  * project.
  */
-public class Robot extends TimedRobot {
+public class Robot extends IterativeRobot {
 //	public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
 	public static OI oi;
 	
@@ -37,11 +62,16 @@ public class Robot extends TimedRobot {
 	public SpeedController drive_right_front;
 	public SpeedController drive_right_back;
 	public SpeedControllerGroup drive_right;
+	
+	public static SpeedController inTake_Left;
+	public static SpeedController inTake_Right;
+
+	public static Intake intakeSubsystem;
 
 	public static DriveTrain driveTrain;
 	
-	Command m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
+//	Command m_autonomousCommand;
+//	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -58,6 +88,10 @@ public class Robot extends TimedRobot {
 		drive_right_back = new PWMVictorSPX(6);
 		drive_right = new SpeedControllerGroup(drive_right_front, drive_right_back);
 		
+		inTake_Left = new PWMVictorSPX(Config.INTAKE_MOTOR_LEFT);
+		inTake_Right = new PWMVictorSPX(Config.INTAKE_MOTOR_RIGHT);
+		intakeSubsystem = new Intake(inTake_Left, inTake_Right);
+
 		driveTrain = new DriveTrain(drive_left, drive_right);
 		
 		oi = new OI();
@@ -89,41 +123,41 @@ public class Robot extends TimedRobot {
 	 * chooser code above (like the commented example) or additional comparisons
 	 * to the switch structure below with additional strings & commands.
 	 */
-	@Override
-	public void autonomousInit() {
-		m_autonomousCommand = m_chooser.getSelected();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.start();
-		}
-	}
+//	@Override
+//	public void autonomousInit() {
+//		m_autonomousCommand = m_chooser.getSelected();
+//
+//		/*
+//		 * String autoSelected = SmartDashboard.getString("Auto Selector",
+//		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
+//		 * = new MyAutoCommand(); break; case "Default Auto": default:
+//		 * autonomousCommand = new ExampleCommand(); break; }
+//		 */
+//
+//		// schedule the autonomous command (example)
+//		if (m_autonomousCommand != null) {
+//			m_autonomousCommand.start();
+//		}
+//	}
 
 	/**
 	 * This function is called periodically during autonomous.
 	 */
-	@Override
-	public void autonomousPeriodic() {
-		Scheduler.getInstance().run();
-	}
+//	@Override
+//	public void autonomousPeriodic() {
+//		Scheduler.getInstance().run();
+//	}
 
-	@Override
-	public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.cancel();
-		}
-	}
+//	@Override
+//	public void teleopInit() {
+//		// This makes sure that the autonomous stops running when
+//		// teleop starts running. If you want the autonomous to
+//		// continue until interrupted by another command, remove
+//		// this line or comment it out.
+//		if (m_autonomousCommand != null) {
+//			m_autonomousCommand.cancel();
+//		}
+//	}
 
 	/**
 	 * This function is called periodically during operator control.

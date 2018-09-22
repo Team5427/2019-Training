@@ -1,4 +1,6 @@
 package org.usfirst.frc.team5427.robot;
+import org.usfirst.frc.team5427.robot.commands.IntakeActivateIn;
+import org.usfirst.frc.team5427.robot.commands.IntakeActivateOut;
 import org.usfirst.frc.team5427.util.Config;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -42,10 +44,16 @@ public class OI
 	// button.whenReleased(new ExampleCommand());
 	
 	public Joystick joy;
-
+	public Button motorIntakeIn;
+	public Button motorIntakeOut;
 	
 	public OI() {
 		joy = new Joystick(Config.JOYSTICK_PORT);
+		motorIntakeIn 	= new JoystickButton(joy, Config.BUTTON_MOTOR_INTAKE_IN);
+		motorIntakeOut 	= new JoystickButton(joy, Config.BUTTON_MOTOR_INTAKE_OUT);
+		
+		motorIntakeIn.whenPressed(new IntakeActivateIn());
+		motorIntakeOut.whenPressed(new IntakeActivateOut());
 
 	}
 	public Joystick getJoy() {
