@@ -24,7 +24,7 @@ public class Config
 	
 	public static final int ELEVATOR_MOTOR_RIGHT = 9;
 	
-	public static final int TILT_MOTOR = 0; //port needed
+	public static final int TILT_MOTOR = 5; 
 	
 	//joystick ports
 	public static final int JOYSTICK_PORT = 0;
@@ -74,9 +74,9 @@ public class Config
 	
 	public static final double ELEVATOR_SPEEDDOWN = -0.5;
 	
-	public static final double TILT_MOTOR_SPEED_UP = 0; //ports needed
+	public static final double TILT_MOTOR_SPEED_UP = 1.0; 
 	
-	public static final double TILE_MOTOR_SPEED_DOWN = 0; //ports needed
+	public static final double TILE_MOTOR_SPEED_DOWN = -1.0;
 	
 	//joystick buttons
 	
@@ -90,8 +90,8 @@ public class Config
 	
 	public static final int BUTTON_ELEVATOR_DOWN = 3;
 	
-	public static final int BUTTON_TILT_UP = 0; //ports needed
+	public static final int BUTTON_TILT_UP = 6; 
 	
-	public static final int BUTTON_TILT_DOWN = 0; //ports needed
+	public static final int BUTTON_TILT_DOWN = 4; 
 
 }
