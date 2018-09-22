@@ -11,17 +11,16 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 
 import org.usfirst.frc.team5427.robot.commands.ElevatorDown;
 import org.usfirst.frc.team5427.robot.commands.ElevatorUp;
 import org.usfirst.frc.team5427.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team5427.robot.subsystems.Elevator;
 import org.usfirst.frc.team5427.robot.subsystems.Intake;
+import org.usfirst.frc.team5427.robot.subsystems.Tilt;
 import org.usfirst.frc.team5427.util.Config;
 
 /**
@@ -53,21 +52,38 @@ public class Robot extends IterativeRobot
 	//links together SpeedController front and rear right
 	SpeedControllerGroup speedcontrollergroup_right;
 	
+	//handles the differential drive train configuration
 	public DifferentialDrive drive;
 	
+	//SpeedController for the left intake motor
 	public static SpeedController motorPWM_IntakeLeft;
+	//SpeedController for the right intake motor
 	public static SpeedController motorPWM_IntakeRight;
 	
-	public static SpeedController motorPWM_ElevatorLeft;
-	public static SpeedController motorPWM_ElevatorRight;
-	
+	//Intake subsystem
 	public static Intake intake;
 	
+	//SpeedController for the left elevator motor
+	public static SpeedController motorPWM_ElevatorLeft;
+	//SpeedController for the right elevator motor
+	public static SpeedController motorPWM_ElevatorRight;
+	
+	public static Elevator elevator;//might be deleted
+	
+	//DigitalInput that handles upper limit swtich
 	public static DigitalInput elevatorLimitUp;
+	//DigitalInput that handles lower limit swtich
 	public static DigitalInput elevatorLimitDown;
+	
+	//?? Commands for elevator function
 	public static ElevatorUp mou = new ElevatorUp();
 	public static ElevatorDown mod = new ElevatorDown();
 	
+	public static SpeedController motorPWM_Tilt;
+	
+	public static Tilt tilt;
+	
+	public static boolean tiltUpNext;
 	//Command m_autonomousCommand;
 
 	/**
@@ -77,27 +93,43 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit() 
 	{	
+		//sets to DigitalInputs, used for limit switch up and down
 		elevatorLimitUp = new DigitalInput(Config.ELEVATOR_LIMIT_UP);
 		elevatorLimitDown = new DigitalInput(Config.ELEVATOR_LIMIT_DOWN);
 		
+		//PWMVictorSPX speed controller used for front and rear left motors of drive train
 		motor_pwm_frontLeft = new PWMVictorSPX(Config.FRONT_LEFT_MOTOR);
 		motor_pwm_rearLeft = new PWMVictorSPX(Config.REAR_LEFT_MOTOR);
+		//links both left motors of drive train
 		speedcontrollergroup_left = new SpeedControllerGroup(motor_pwm_frontLeft, motor_pwm_rearLeft);
 		
+		//PWMVictorSPX speed controller used for front and rear right motors of drive train
 		motor_pwm_frontRight = new PWMVictorSPX(Config.FRONT_RIGHT_MOTOR);
 		motor_pwm_rearRight = new PWMVictorSPX(Config.REAR_RIGHT_MOTOR);
+		//links both right motors of drive train
 		speedcontrollergroup_right = new SpeedControllerGroup(motor_pwm_frontRight, motor_pwm_rearRight);
 		
+		//uses both left and right side speed controllers of drive train to create DifferentialDrive
 		drive = new DifferentialDrive(speedcontrollergroup_left, speedcontrollergroup_right);
+		//??disables motor safety
 		drive.setSafetyEnabled(false);
+		//initializes DriveTrain subsystem using both left and right speed controller groups
 		driveTrain = new DriveTrain(speedcontrollergroup_left, speedcontrollergroup_right, drive);
 		
+		
+		//PWMVictorSPX speed controller used for left intake motor
 		motorPWM_IntakeLeft = new PWMVictorSPX(Config.INTAKE_MOTOR_LEFT);
+		//PWMVictorSPX speed controller used for right intake motor
 		motorPWM_IntakeRight = new PWMVictorSPX(Config.INTAKE_MOTOR_RIGHT);
+		//initializes Intake subsystem using both left and right speed controllers 
 		intake = new Intake(motorPWM_IntakeLeft, motorPWM_IntakeRight);
 		
 		motorPWM_ElevatorLeft = new PWMVictorSPX(Config.ELEVATOR_MOTOR_LEFT);
 		motorPWM_ElevatorRight = new PWMVictorSPX(Config.ELEVATOR_MOTOR_RIGHT);
+		elevator = new Elevator(motorPWM_ElevatorLeft, motorPWM_ElevatorRight);//might be deleted
+		
+		motorPWM_Tilt = new PWMVictorSPX(Config.TILT_MOTOR);
+		tilt = new Tilt(motorPWM_Tilt);
 		
 //		m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());

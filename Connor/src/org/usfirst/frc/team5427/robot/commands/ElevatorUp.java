@@ -10,7 +10,7 @@ public class ElevatorUp extends Command
 	
 	public ElevatorUp()
 	{
-		
+		requires(Robot.elevator);//might be deleted
 	}
 	
 	protected void initialize()
@@ -24,6 +24,7 @@ public class ElevatorUp extends Command
 		Robot.motorPWM_ElevatorLeft.set(-Config.ELEVATOR_SPEEDUP);
 	}
 
+	//return true if button is released or limit switch up is detected
 	@Override
 	public boolean isFinished() 
 	{
@@ -34,8 +35,9 @@ public class ElevatorUp extends Command
 	
 	protected void end()
 	{
-		Robot.motorPWM_ElevatorLeft.set(0);
-		Robot.motorPWM_ElevatorRight.set(0);
+		//Robot.motorPWM_ElevatorRight.set(0);
+		//Robot.motorPWM_ElevatorLeft.set(0);
+		Robot.elevator.stop();
 	}
 	
 	protected void interrupted()

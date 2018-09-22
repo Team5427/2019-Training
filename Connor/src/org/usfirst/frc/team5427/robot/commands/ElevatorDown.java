@@ -10,19 +10,20 @@ public class ElevatorDown extends Command
 	
 	public ElevatorDown()
 	{
-		
+		requires(Robot.elevator);//might be deleted
 	}
 	
 	protected void initialize()
 	{
 		this.setInterruptible(true);
-		Robot.motorPWM_ElevatorRight.set(Config.ELEVATOR_SPEEDDOWN);
-		Robot.motorPWM_ElevatorLeft.set(-Config.ELEVATOR_SPEEDDOWN);
+		//Robot.motorPWM_ElevatorRight.set(Config.ELEVATOR_SPEEDDOWN);
+		//Robot.motorPWM_ElevatorLeft.set(-Config.ELEVATOR_SPEEDDOWN);
 	}
 	
 	protected void execute()
 	{
-		
+		Robot.motorPWM_ElevatorRight.set(Config.ELEVATOR_SPEEDDOWN);//might be deleted
+		Robot.motorPWM_ElevatorLeft.set(-Config.ELEVATOR_SPEEDDOWN);//might be deleted
 	}
 
 	@Override
@@ -35,8 +36,9 @@ public class ElevatorDown extends Command
 	
 	protected void end()
 	{
-		Robot.motorPWM_ElevatorLeft.set(0);
-		Robot.motorPWM_ElevatorRight.set(0);
+		//Robot.motorPWM_ElevatorLeft.set(0);
+		//Robot.motorPWM_ElevatorRight.set(0);
+		Robot.elevator.stop();//might be deleted
 	}
 	
 	protected void interrupted()
