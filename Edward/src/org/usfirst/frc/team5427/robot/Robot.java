@@ -21,6 +21,8 @@ import org.usfirst.frc.team5427.robot.commands.ElevatorDown;
 import org.usfirst.frc.team5427.robot.commands.ElevatorUp;
 import org.usfirst.frc.team5427.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5427.util.Config;
+
+import autoCommands.moveForward;
 import edu.wpi.cscore.AxisCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -42,6 +44,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  */
 public class Robot extends TimedRobot 
 {
+	Command autoCommandForward;
 	public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
 	public static OI m_oi;
 	public static DriveTrain drivetrain;
@@ -69,6 +72,7 @@ public class Robot extends TimedRobot
 	
 	public void robotInit() 
 	{		
+		autoCommandForward = new moveForward();
 		//                         Driving
 		
 		motor_pwm_frontLeft = new PWMVictorSPX(Config.FRONT_LEFT_MOTOR);
@@ -123,11 +127,12 @@ public class Robot extends TimedRobot
 	}
 	public void autonomousInit() 
 	{
-		Scheduler.getInstance().run();
+		
 	}
 	public void autonomousPeriodic() 
 	{
-
+		if(autoCommandForward!=null)
+			autoCommandForward.start();
 	}
 	public void teleopInit() 
 	{
