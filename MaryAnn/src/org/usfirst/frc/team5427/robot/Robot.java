@@ -7,27 +7,13 @@
 
 package org.usfirst.frc.team5427.robot;
 
-//import org.usfirst.frc.team5427.autoCommands.AutoPath;
-//import org.usfirst.frc.team5427.autoCommands.Delayed_Baseline;
-//import org.usfirst.frc.team5427.autoCommands.center.Center_SwitchIsRight;
-//import org.usfirst.frc.team5427.autoCommands.center.Delayed_CSL;
-//import org.usfirst.frc.team5427.autoCommands.center.Delayed_CSR;
-//import org.usfirst.frc.team5427.autoCommands.center.FidgetCL;
-//import org.usfirst.frc.team5427.autoCommands.left.FidgetRSL;
-//import org.usfirst.frc.team5427.autoCommands.left.Left_ScaleIsLeft;
-//import org.usfirst.frc.team5427.autoCommands.left.Left_ScaleIsRight;
-//import org.usfirst.frc.team5427.autoCommands.left.Left_SwitchIsLeft;
-//import org.usfirst.frc.team5427.autoCommands.right.Right_ScaleIsRight;
-//import org.usfirst.frc.team5427.autoCommands.right.Right_SwitchIsRight;
+
 import org.usfirst.frc.team5427.robot.commands.DriveWithJoystick;
-//import org.usfirst.frc.team5427.robot.commands.MoveElevatorDown;
-//import org.usfirst.frc.team5427.robot.commands.MoveElevatorUp;
+import org.usfirst.frc.team5427.robot.commands.ElevatorDown;
+import org.usfirst.frc.team5427.robot.commands.ElevatorUp;
 import org.usfirst.frc.team5427.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5427.robot.subsystems.Intake;
 import org.usfirst.frc.team5427.util.Config;
-//import org.usfirst.frc.team5427.util.SameLine;
-
-//import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.cscore.AxisCamera;
 import edu.wpi.first.wpilibj.CameraServer;
@@ -42,7 +28,8 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import org.usfirst.frc.team5427.robot.commands.ElevatorDown;
+import org.usfirst.frc.team5427.robot.commands.ElevatorUp;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -70,6 +57,9 @@ public class Robot extends IterativeRobot {
 
 	public static DriveTrain driveTrain;
 	
+	public static ElevatorUp eup = new ElevatorUp();
+	public static ElevatorDown ed = new ElevatorDown();
+
 //	Command m_autonomousCommand;
 //	SendableChooser<Command> m_chooser = new SendableChooser<>();
 

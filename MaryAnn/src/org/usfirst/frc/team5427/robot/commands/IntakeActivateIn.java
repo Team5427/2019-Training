@@ -34,7 +34,7 @@ public class IntakeActivateIn extends Command{
 	{
 		Robot.intakeSubsystem.setSpeed(0);
 	}
-	protected void intterupted()
+	protected void interupted()
 	{
 		end();
 	}

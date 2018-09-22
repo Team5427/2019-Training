@@ -46,15 +46,22 @@ public class OI
 	public Joystick joy;
 	public Button motorIntakeIn;
 	public Button motorIntakeOut;
+	public Button elevatorUp;
+	public Button elevatorDown;
 	
-	public OI() {
+	public OI()
+	{
 		joy = new Joystick(Config.JOYSTICK_PORT);
 		motorIntakeIn 	= new JoystickButton(joy, Config.BUTTON_MOTOR_INTAKE_IN);
 		motorIntakeOut 	= new JoystickButton(joy, Config.BUTTON_MOTOR_INTAKE_OUT);
+		elevatorUp = new JoystickButton(joy,Config.BUTTON_ELEVATOR_UP);
+		elevatorDown = new JoystickButton(joy,Config.BUTTON_ELEVATOR_DOWN);
 		
-		motorIntakeIn.whenPressed(new IntakeActivateIn());
-		motorIntakeOut.whenPressed(new IntakeActivateOut());
-
+		motorIntakeIn.whileHeld(new IntakeActivateIn());
+		motorIntakeOut.whileHeld(new IntakeActivateOut());
+//		elevatorUp.whileHeld(new ElevatorUp());
+//		elevatorDown.whileHeld(new ElevatorDown());
+		
 	}
 	public Joystick getJoy() {
 		// TODO Auto-generated method stub
