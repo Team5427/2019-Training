@@ -56,6 +56,7 @@ public class Robot extends TimedRobot {
 		spgLeft = new SpeedControllerGroup(br_motor, bl_motor);
 		drive = new DifferentialDrive(spgLeft, spgRight);
 		driveTrain = new DriveTrain(spgLeft, spgRight, drive);
+		drive.setSafetyEnabled(false);
 	}
 	@Override
 	public void disabledInit() {
