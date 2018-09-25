@@ -98,10 +98,7 @@ public class Robot extends TimedRobot {
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
-		// this line or comment it out.
-		new DriveWithJoystick().start();
-		
-		
+		// this line or comment it out.		
 	}
 
 	/**
@@ -109,7 +106,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-
+		Scheduler.getInstance().run();
 	}
 
 	/**
