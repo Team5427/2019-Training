@@ -6,6 +6,9 @@
 /*----------------------------------------------------------------------------*/
 package org.usfirst.frc.team5427.robot;
 
+import org.usfirst.frc.team5427.robot.commands.IntakeActivateIn;
+import org.usfirst.frc.team5427.robot.commands.IntakeActivateOut;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -16,8 +19,20 @@ public class OI {
 
 
 	public Joystick joy1;
+	Button motorIntakeIn;
+	Button motorIntakeOut;
+	Button elevatorUp;
+	Button elevatorDown;
 	public OI() {
 		joy1 = new Joystick(0);
+		motorIntakeIn = new JoystickButton(joy1, 7);
+		motorIntakeOut = new JoystickButton(joy1, 1);
+		elevatorUp = new JoystickButton(joy1, 5);
+		elevatorDown = new JoystickButton(joy1, 3);
+		motorIntakeIn.whenPressed(new IntakeActivateIn());
+		motorIntakeOut.whenPressed(new IntakeActivateOut());
+		elevatorUp.whenPressed(Robot.mou);
+		elevatorDown.whenPressed(Robot.mod);
 	}
 
 	/**

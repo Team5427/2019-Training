@@ -10,9 +10,12 @@ package org.usfirst.frc.team5427.robot;
 
 
 import org.usfirst.frc.team5427.robot.commands.DriveWithJoystick;
+import org.usfirst.frc.team5427.robot.commands.ElevatorDown;
+import org.usfirst.frc.team5427.robot.commands.ElevatorUp;
 import org.usfirst.frc.team5427.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team5427.robot.subsystems.Elevator;
 import org.usfirst.frc.team5427.robot.subsystems.Intake;
-
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
@@ -44,8 +47,16 @@ public class Robot extends TimedRobot {
 	public static DriveTrain driveTrain;
 	public static Intake intake;
 	public static OI oi;
+	public static ElevatorUp mou;
+	public static ElevatorDown mod;
+	public static Elevator elevator;
+	public static DigitalInput elevLimSwiUp, elevLimSwiDown;
 	@Override
 	public void robotInit() {
+		elevLimSwiUp = new DigitalInput(5);
+		elevLimSwiDown = new DigitalInput(4);
+		elevator = new Elevator(new PWMVictorSPX(4), new PWMVictorSPX(9));
+		intake = new Intake(new PWMVictorSPX(7), new PWMVictorSPX(8));
 		oi = new OI();
 		fr_motor = new PWMVictorSPX(frontRightPort);
 		br_motor = new PWMVictorSPX(frontLeftPort);
@@ -56,6 +67,7 @@ public class Robot extends TimedRobot {
 		spgLeft = new SpeedControllerGroup(br_motor, bl_motor);
 		drive = new DifferentialDrive(spgLeft, spgRight);
 		driveTrain = new DriveTrain(spgLeft, spgRight, drive);
+		drive.setSafetyEnabled(false);
 	}
 	@Override
 	public void disabledInit() {
@@ -98,7 +110,7 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		new DriveWithJoystick().start();
+		
 		
 		
 	}
@@ -108,7 +120,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-
+		Scheduler.getInstance().run();
 	}
 
 	/**
