@@ -2,12 +2,21 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Users/abina/navx-mxp/java/lib/navx_frc.jar"/>
 	<classpathentry kind="lib" path="C:/Users/abina/wpilib/java/current/lib/cscore.jar"/>
 	<classpathentry kind="lib" path="C:/Users/abina/wpilib/java/current/lib/ntcore.jar"/>
 	<classpathentry kind="lib" path="C:/Users/abina/wpilib/java/current/lib/opencv.jar"/>
 	<classpathentry kind="lib" path="C:/Users/abina/wpilib/java/current/lib/WPILib.jar"/>
 	<classpathentry kind="lib" path="C:/Users/abina/wpilib/java/current/lib/wpiutil.jar"/>
+=======
+	<classpathentry kind="lib" path="C:/Users/art/navx-mxp/java/lib/navx_frc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/art/wpilib/java/current/lib/cscore.jar"/>
+	<classpathentry kind="lib" path="C:/Users/art/wpilib/java/current/lib/ntcore.jar"/>
+	<classpathentry kind="lib" path="C:/Users/art/wpilib/java/current/lib/opencv.jar"/>
+	<classpathentry kind="lib" path="C:/Users/art/wpilib/java/current/lib/WPILib.jar"/>
+	<classpathentry kind="lib" path="C:/Users/art/wpilib/java/current/lib/wpiutil.jar"/>
+>>>>>>> 4b7cad4aedd3ec6221ec0013ea9d75500afe0f94
 	<classpathentry kind="var" path="wpilib" sourcepath="wpilib.sources"/>
 	<classpathentry kind="var" path="networktables" sourcepath="networktables.sources"/>
 	<classpathentry kind="var" path="opencv" sourcepath="opencv.sources"/>
