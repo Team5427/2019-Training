@@ -139,6 +139,7 @@ public class Robot extends IterativeRobot
 //		m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		m_oi = new OI();
+		m_driveForward = new DriveForward(2.00);
 	}
 
 	/**
@@ -173,7 +174,6 @@ public class Robot extends IterativeRobot
 	public void autonomousInit() 
 	{
 		Scheduler.getInstance().run();
-		m_driveForward = new DriveForward(2.00);
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -183,7 +183,7 @@ public class Robot extends IterativeRobot
 		 */
 
 		// schedule the autonomous command (example)
-		if (m_driveForward != null) 
+		if (m_driveForward != null && !m_driveForward.isRunning()) 
 		{
 			m_driveForward.start();
 		}
