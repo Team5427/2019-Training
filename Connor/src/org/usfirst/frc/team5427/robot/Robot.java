@@ -11,10 +11,12 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 
+import org.usfirst.frc.team5427.robot.commands.DriveForward;
 import org.usfirst.frc.team5427.robot.commands.ElevatorDown;
 import org.usfirst.frc.team5427.robot.commands.ElevatorUp;
 import org.usfirst.frc.team5427.robot.subsystems.DriveTrain;
@@ -76,15 +78,15 @@ public class Robot extends IterativeRobot
 	public static DigitalInput elevatorLimitDown;
 	
 	//?? Commands for elevator function
-	public static ElevatorUp mou = new ElevatorUp();
-	public static ElevatorDown mod = new ElevatorDown();
+	public static ElevatorUp mou;
+	public static ElevatorDown mod;
 	
 	public static SpeedController motorPWM_Tilt;
 	
 	public static Tilt tilt;
 	
 	public static boolean tiltUpNext;
-	//Command m_autonomousCommand;
+	Command m_driveForward;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -127,6 +129,9 @@ public class Robot extends IterativeRobot
 		motorPWM_ElevatorLeft = new PWMVictorSPX(Config.ELEVATOR_MOTOR_LEFT);
 		motorPWM_ElevatorRight = new PWMVictorSPX(Config.ELEVATOR_MOTOR_RIGHT);
 		elevator = new Elevator(motorPWM_ElevatorLeft, motorPWM_ElevatorRight);//might be deleted
+		mou = new ElevatorUp();
+		mod = new ElevatorDown();
+		
 		
 		motorPWM_Tilt = new PWMVictorSPX(Config.TILT_MOTOR);
 		tilt = new Tilt(motorPWM_Tilt);
@@ -167,7 +172,8 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousInit() 
 	{
-//		m_autonomousCommand = m_chooser.getSelected();
+		Scheduler.getInstance().run();
+		m_driveForward = new DriveForward(2.00);
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -177,10 +183,10 @@ public class Robot extends IterativeRobot
 		 */
 
 		// schedule the autonomous command (example)
-//		if (m_autonomousCommand != null) 
-//		{
-//			m_autonomousCommand.start();
-//		}
+		if (m_driveForward != null) 
+		{
+			m_driveForward.start();
+		}
 	}
 
 	/**

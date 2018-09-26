@@ -10,7 +10,7 @@ public class ElevatorUp extends Command
 	
 	public ElevatorUp()
 	{
-		requires(Robot.elevator);//might be deleted
+		requires(Robot.elevator);
 	}
 	
 	protected void initialize()
