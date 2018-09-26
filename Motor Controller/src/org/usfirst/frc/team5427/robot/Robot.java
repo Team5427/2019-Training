@@ -15,6 +15,8 @@ import org.usfirst.frc.team5427.robot.commands.ElevatorUp;
 import org.usfirst.frc.team5427.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5427.robot.subsystems.Elevator;
 import org.usfirst.frc.team5427.robot.subsystems.Intake;
+import org.usfirst.frc.team5427.robot.subsystems.Tilt;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
@@ -51,12 +53,14 @@ public class Robot extends TimedRobot {
 	public static ElevatorDown mod;
 	public static Elevator elevator;
 	public static DigitalInput elevLimSwiUp, elevLimSwiDown;
+	public static Tilt tilt;
 	@Override
 	public void robotInit() {
 		elevLimSwiUp = new DigitalInput(5);
 		elevLimSwiDown = new DigitalInput(4);
 		elevator = new Elevator(new PWMVictorSPX(4), new PWMVictorSPX(9));
 		intake = new Intake(new PWMVictorSPX(7), new PWMVictorSPX(8));
+		tilt = new Tilt(new PWMVictorSPX(5));
 		oi = new OI();
 		fr_motor = new PWMVictorSPX(frontRightPort);
 		br_motor = new PWMVictorSPX(frontLeftPort);
@@ -71,7 +75,7 @@ public class Robot extends TimedRobot {
 	}
 	@Override
 	public void disabledInit() {
-
+		
 	}
 
 	@Override
@@ -109,7 +113,10 @@ public class Robot extends TimedRobot {
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
-		// this line or comment it out.		
+		// this line or comment it out.
+		
+		
+		
 	}
 
 	/**
