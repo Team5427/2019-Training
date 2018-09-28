@@ -33,10 +33,7 @@ import org.usfirst.frc.team5427.util.Config;
  * project.
  */
 public class Robot extends IterativeRobot 
-{
-	//operator interface
-	public static OI m_oi;
-	
+{	
 	//DriveTrain subsystem 
 	public static DriveTrain driveTrain;
 	
@@ -86,6 +83,10 @@ public class Robot extends IterativeRobot
 	public static Tilt tilt;
 	
 	public static boolean tiltUpNext;
+	
+	//operator interface
+	public static OI m_oi;
+
 	Command m_driveForward;
 
 	/**
