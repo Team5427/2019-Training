@@ -12,6 +12,7 @@ import org.usfirst.frc.team5427.robot.commands.DriveWithJoystick;
 import org.usfirst.frc.team5427.robot.commands.ElevatorDown;
 import org.usfirst.frc.team5427.robot.commands.ElevatorUp;
 import org.usfirst.frc.team5427.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team5427.robot.subsystems.Elevator;
 import org.usfirst.frc.team5427.robot.subsystems.Intake;
 import org.usfirst.frc.team5427.util.Config;
 
@@ -52,13 +53,17 @@ public class Robot extends IterativeRobot {
 	
 	public static SpeedController inTake_Left;
 	public static SpeedController inTake_Right;
-
+	
+	public static SpeedController elevator_Left;
+	public static SpeedController elevator_Right;
+	
 	public static Intake intakeSubsystem;
 
 	public static DriveTrain driveTrain;
 	
-	public static ElevatorUp eup = new ElevatorUp();
-	public static ElevatorDown ed = new ElevatorDown();
+	public static Elevator elevator;
+	
+	
 
 //	Command m_autonomousCommand;
 //	SendableChooser<Command> m_chooser = new SendableChooser<>();
