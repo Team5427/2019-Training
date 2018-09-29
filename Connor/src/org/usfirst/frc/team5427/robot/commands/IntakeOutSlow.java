@@ -20,8 +20,9 @@ public class IntakeOutSlow extends Command
 	
 	protected void execute()
 	{
-		Robot.intake.leftFlywheel.set(0.3);
-		Robot.intake.rightFlywheel.set(-0.3);
+		//Robot.intake.leftFlywheel.set(Config.INTAKE_MOTOR_SPEED_IN);
+		//Robot.intake.rightFlywheel.set(Config.INTAKE_MOTOR_SPEED_OUT);
+		Robot.intake.setSpeed(Config.INTAKE_MOTOR_SPEED_OUT);
 	}
 	
 	@Override

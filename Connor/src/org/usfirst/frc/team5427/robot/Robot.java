@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 
+import java.util.concurrent.TimeUnit;
+
 import org.usfirst.frc.team5427.robot.commands.DriveForward;
 import org.usfirst.frc.team5427.robot.commands.ElevatorDown;
 import org.usfirst.frc.team5427.robot.commands.ElevatorUp;
@@ -196,10 +198,9 @@ public class Robot extends IterativeRobot
 		
 		m_driveForward.start();
 		m_elevatorUp.start();
-		if(m_elevatorUp.isFinished())
-		{
-			m_intakeOut.start();
-		}
+		
+		m_intakeOut.start();
+		
 		
 		
 		
