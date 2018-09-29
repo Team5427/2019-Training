@@ -1,14 +1,15 @@
 package org.usfirst.frc.team5427.robot.commands;
 
 import org.usfirst.frc.team5427.robot.Robot;
+import org.usfirst.frc.team5427.util.Config;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DriveForward extends Command 
-{
-	public DriveForward(double time) 
+public class AutoIntakeOut extends Command {
+
+	public AutoIntakeOut(double time) 
 	{
-		requires(Robot.drivetrain);
+		requires(Robot.intake);
 		setTimeout(time);
 	}
 	protected void initialize() 
@@ -17,13 +18,11 @@ public class DriveForward extends Command
 	}
 	protected void execute() 
 	{
-		Robot.drivetrain.drive_Left.set(.3);
-		Robot.drivetrain.drive_Right.set(-.3);
+		Robot.intake.setSpeed(Config.INTAKE_MOTOR_SPEED_OUT);
 	}
     protected void end() 
 	{
-		Robot.drivetrain.drive_Left.set(0);
-		Robot.drivetrain.drive_Right.set(0);
+    	Robot.intake.setSpeed(Config.INTAKE_MOTOR_SPEED_OUT);
 	}
 	@Override
 	public boolean isFinished() 
@@ -34,4 +33,5 @@ public class DriveForward extends Command
 	{
 		end();
 	}
+
 }

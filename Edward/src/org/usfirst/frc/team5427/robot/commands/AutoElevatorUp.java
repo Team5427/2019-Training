@@ -1,14 +1,14 @@
 package org.usfirst.frc.team5427.robot.commands;
 
 import org.usfirst.frc.team5427.robot.Robot;
+import org.usfirst.frc.team5427.util.Config;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DriveForward extends Command 
-{
-	public DriveForward(double time) 
-	{
-		requires(Robot.drivetrain);
+public class AutoElevatorUp extends Command {
+
+	
+	public AutoElevatorUp(double time) {
 		setTimeout(time);
 	}
 	protected void initialize() 
@@ -17,13 +17,13 @@ public class DriveForward extends Command
 	}
 	protected void execute() 
 	{
-		Robot.drivetrain.drive_Left.set(.3);
-		Robot.drivetrain.drive_Right.set(-.3);
+		Robot.ElevatorRightSide.set(Config.ELEVATOR_MOTOR_SPEED_UP);
+		Robot.ElevatorLeftSide.set(-Config.ELEVATOR_MOTOR_SPEED_UP);
 	}
     protected void end() 
 	{
-		Robot.drivetrain.drive_Left.set(0);
-		Robot.drivetrain.drive_Right.set(0);
+    	Robot.ElevatorLeftSide.set(0);
+		Robot.ElevatorRightSide.set(0);
 	}
 	@Override
 	public boolean isFinished() 
@@ -34,4 +34,5 @@ public class DriveForward extends Command
 	{
 		end();
 	}
+
 }

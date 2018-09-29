@@ -28,9 +28,7 @@ public class DriveTrain extends Subsystem {
 	}
 	public void takeJoystickInputs(Joystick joy) 
 	{
-		
 		drive.arcadeDrive(-joy.getY(), joy.getZ() * .75);
-
 	}
 	public void stop() {
 		drive.stopMotor();

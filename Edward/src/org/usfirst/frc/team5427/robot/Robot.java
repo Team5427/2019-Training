@@ -8,6 +8,8 @@
 package org.usfirst.frc.team5427.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.IterativeRobot;
+
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -19,10 +21,14 @@ import org.usfirst.frc.team5427.robot.subsystems.Intake;
 import org.usfirst.frc.team5427.robot.commands.DriveWithJoystick;
 import org.usfirst.frc.team5427.robot.commands.ElevatorDown;
 import org.usfirst.frc.team5427.robot.commands.ElevatorUp;
+import org.usfirst.frc.team5427.robot.commands.AutoElevatorUp;
+import org.usfirst.frc.team5427.robot.commands.AutoIntakeOut;
+import org.usfirst.frc.team5427.robot.commands.DriveForward;
+
+
 import org.usfirst.frc.team5427.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5427.util.Config;
 
-import autoCommands.moveForward;
 import edu.wpi.cscore.AxisCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -42,9 +48,11 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  * creating this project, you must also update the build.properties file in the
  * project.
  */
-public class Robot extends TimedRobot 
+public class Robot extends IterativeRobot 
 {
-	Command autoCommandForward;
+	DriveForward df;
+	AutoElevatorUp aeu;
+	AutoIntakeOut aio;
 	public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
 	public static OI m_oi;
 	public static DriveTrain drivetrain;
@@ -72,7 +80,7 @@ public class Robot extends TimedRobot
 	
 	public void robotInit() 
 	{		
-		autoCommandForward = new moveForward();
+		
 		//                         Driving
 		
 		motor_pwm_frontLeft = new PWMVictorSPX(Config.FRONT_LEFT_MOTOR);
@@ -127,12 +135,21 @@ public class Robot extends TimedRobot
 	}
 	public void autonomousInit() 
 	{
+		df = new DriveForward(2.5);
+		df.start();
+		
+		aeu = new AutoElevatorUp(1.1);
+		aeu.start();
+		
+		aio = new AutoIntakeOut(3);
+		
 		
 	}
 	public void autonomousPeriodic() 
 	{
-		if(autoCommandForward!=null)
-			autoCommandForward.start();
+		Scheduler.getInstance().run();
+		if(df.timeSinceInitialized()>=5)
+			aio.start();
 	}
 	public void teleopInit() 
 	{
