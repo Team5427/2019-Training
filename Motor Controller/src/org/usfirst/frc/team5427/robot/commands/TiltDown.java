@@ -25,7 +25,7 @@ public class TiltDown extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Robot.oi.getJoy().getRawButtonReleased(4);
+    	return !Robot.oi.getJoy().getRawButton(4);
     }
 
     // Called once after isFinished returns true
