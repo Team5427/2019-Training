@@ -6,8 +6,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Elevator extends Subsystem 
 {
 	
-	SpeedController elevator_left;
-	SpeedController elevator_right;
+	public SpeedController elevator_left;
+	public SpeedController elevator_right;
 	
 	public Elevator(SpeedController elevator_left, SpeedController elevator_right)
 	{

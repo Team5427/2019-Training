@@ -8,35 +8,32 @@ import edu.wpi.first.wpilibj.command.Command;
 public class IntakeOutSlow extends Command
 {
 	
-	double speed;
 	
-	public IntakeOutSlow(double speed)
+	public IntakeOutSlow(double time)
 	{
 		requires(Robot.intake);
-		this.speed = speed;
+		setTimeout(time);
 	}
 	
 	protected void initialize()
-	{
-		this.setInterruptible(true);
-	}
+	{	}
 	
 	protected void execute()
 	{
-		Robot.intake.setSpeed(speed);
+		Robot.intake.leftFlywheel.set(0.3);
+		Robot.intake.rightFlywheel.set(-0.3);
 	}
 	
 	@Override
 	protected boolean isFinished()
 	{
-		if(Robot.m_oi.getJoy().getRawButton(Config.BUTTON_MOTOR_INTAKE_OUT_SLOW))
-			return true;
-		return false;
+		return this.isTimedOut();
 	}
 
 	protected void end()
 	{
-		Robot.intake.setSpeed(0);
+		Robot.intake.leftFlywheel.set(0);
+		Robot.intake.rightFlywheel.set(0);
 	}
 	
 	protected void interrupted()

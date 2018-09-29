@@ -19,6 +19,8 @@ import edu.wpi.first.wpilibj.PWMVictorSPX;
 import org.usfirst.frc.team5427.robot.commands.DriveForward;
 import org.usfirst.frc.team5427.robot.commands.ElevatorDown;
 import org.usfirst.frc.team5427.robot.commands.ElevatorUp;
+import org.usfirst.frc.team5427.robot.commands.ElevatorUpAuto;
+import org.usfirst.frc.team5427.robot.commands.IntakeOutSlow;
 import org.usfirst.frc.team5427.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5427.robot.subsystems.Elevator;
 import org.usfirst.frc.team5427.robot.subsystems.Intake;
@@ -87,7 +89,11 @@ public class Robot extends IterativeRobot
 	//operator interface
 	public static OI m_oi;
 
-	Command m_driveForward;
+	DriveForward m_driveForward;
+	
+	ElevatorUpAuto m_elevatorUp;
+	
+	IntakeOutSlow m_intakeOut;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -141,6 +147,8 @@ public class Robot extends IterativeRobot
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		m_oi = new OI();
 		m_driveForward = new DriveForward(2.00);
+		m_elevatorUp = new ElevatorUpAuto(1.50);
+		m_intakeOut = new IntakeOutSlow(2.00);
 	}
 
 	/**
@@ -184,10 +192,18 @@ public class Robot extends IterativeRobot
 		 */
 
 		// schedule the autonomous command (example)
-		if (m_driveForward != null && !m_driveForward.isRunning()) 
+		//m_driveForward.start();
+		
+		m_driveForward.start();
+		m_elevatorUp.start();
+		if(m_elevatorUp.isFinished())
 		{
-			m_driveForward.start();
+			m_intakeOut.start();
 		}
+		
+		
+		
+		
 	}
 
 	/**
