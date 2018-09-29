@@ -9,39 +9,45 @@ package org.usfirst.frc.team5427.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team5427.robot.Robot;
+import org.usfirst.frc.team5427.util.Config;
 
 /**
  * An example command.  You can replace me with your own command.
  */
-public class ElevatorUp extends Command {
-	public ElevatorUp() {
-		requires(Robot.intakeSubsystem);
-	}
+public class MoveElevatorUp extends Command {
+	public MoveElevatorUp() {}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
+		this.setInterruptible(true);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
+		Robot.elevator_Left.set(Config.ELEVATOR_MOTOR_SPEED_UP);
+		Robot.elevator_Right.set(Config.ELEVATOR_MOTOR_SPEED_UP);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
-	protected boolean isFinished() {
-		return false;
+	public boolean isFinished() {
+		Robot.elevatorLimitSwithUp.get();
+		return (!Robot.oi.getJoy().getRawButton(Config.BUTTON_ELEVATOR_UP) || !Robot.elevatorLimitSwithUp.get());
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
+		Robot.elevator_Left.set(0);
+		Robot.elevator_Right.set(0);
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
+		end();
 	}
 }

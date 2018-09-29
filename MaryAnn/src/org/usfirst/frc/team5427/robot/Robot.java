@@ -9,10 +9,9 @@ package org.usfirst.frc.team5427.robot;
 
 
 import org.usfirst.frc.team5427.robot.commands.DriveWithJoystick;
-import org.usfirst.frc.team5427.robot.commands.ElevatorDown;
-import org.usfirst.frc.team5427.robot.commands.ElevatorUp;
+import org.usfirst.frc.team5427.robot.commands.MoveElevatorDown;
+import org.usfirst.frc.team5427.robot.commands.MoveElevatorUp;
 import org.usfirst.frc.team5427.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team5427.robot.subsystems.Elevator;
 import org.usfirst.frc.team5427.robot.subsystems.Intake;
 import org.usfirst.frc.team5427.util.Config;
 
@@ -29,8 +28,9 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team5427.robot.commands.ElevatorDown;
-import org.usfirst.frc.team5427.robot.commands.ElevatorUp;
+import org.usfirst.frc.team5427.robot.commands.MoveElevatorDown;
+import org.usfirst.frc.team5427.robot.commands.MoveElevatorUp;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -56,12 +56,15 @@ public class Robot extends IterativeRobot {
 	
 	public static SpeedController elevator_Left;
 	public static SpeedController elevator_Right;
+	public static DigitalInput elevatorLimitSwithUp;
+	public static DigitalInput elevatorLimitSwitchDown;
 	
 	public static Intake intakeSubsystem;
 
 	public static DriveTrain driveTrain;
 	
-	public static Elevator elevator;
+	public static MoveElevatorUp meu = new MoveElevatorUp();
+	public static MoveElevatorDown med = new MoveElevatorDown();
 	
 	
 
@@ -78,16 +81,19 @@ public class Robot extends IterativeRobot {
 		drive_left_front = new PWMVictorSPX(1);
 		drive_left_back = new PWMVictorSPX(0);
 		drive_left = new SpeedControllerGroup(drive_left_front, drive_left_back);
-		
 		drive_right_front = new PWMVictorSPX(3);
 		drive_right_back = new PWMVictorSPX(6);
 		drive_right = new SpeedControllerGroup(drive_right_front, drive_right_back);
-		
+		driveTrain = new DriveTrain(drive_left, drive_right);
+
 		inTake_Left = new PWMVictorSPX(Config.INTAKE_MOTOR_LEFT);
 		inTake_Right = new PWMVictorSPX(Config.INTAKE_MOTOR_RIGHT);
 		intakeSubsystem = new Intake(inTake_Left, inTake_Right);
 
-		driveTrain = new DriveTrain(drive_left, drive_right);
+		elevatorLimitSwithUp = new DigitalInput(Config.ELEVATOR_LIMIT_SWITCH_UP);
+		elevatorLimitSwitchDown = new DigitalInput(Config.ELEVATOR_LIMIT_SWITCH_DOWN);
+		elevator_Left = new PWMVictorSPX(Config.ELEVATOR_MOTOR_LEFT);
+		elevator_Right = new PWMVictorSPX(Config.ELEVATOR_MOTOR_RIGHT);
 		
 		oi = new OI();
 	}
@@ -160,6 +166,9 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		
+		meu.isFinished();
+		med.isFinished();
 	}
 
 	/**
