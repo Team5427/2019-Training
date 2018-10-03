@@ -105,7 +105,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		tf = new TimedForward(2);
+		tf = new TimedForward(5);
+		
 		tf.start();
 	}
 
