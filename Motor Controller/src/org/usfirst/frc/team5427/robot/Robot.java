@@ -59,7 +59,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		elevLimSwiUp = new DigitalInput(Config.ELEVATOR_LIMIT_SWITCH_UP);
-		elevLimSwiDown = new DigitalInput(Config.ELEVATOR_LIMIT_SWITCH_UP);
+		elevLimSwiDown = new DigitalInput(Config.ELEVATOR_LIMIT_SWITCH_DOWN);
 		elevLeft = new PWMVictorSPX(Config.ELEVATOR_MOTOR_LEFT);
 		elevRight =  new PWMVictorSPX(Config.ELEVATOR_MOTOR_RIGHT);
 		elevator = new Elevator(elevLeft, elevRight);

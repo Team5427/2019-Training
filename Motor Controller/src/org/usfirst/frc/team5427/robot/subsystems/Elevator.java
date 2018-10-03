@@ -25,18 +25,8 @@ public class Elevator extends Subsystem {
 	}
 
 	public void setSpeed(double speed) {
-		if (speed < 0) {
-			leftMotor.set(speed * LEFT_MOTOR_BIAS_BACKWARD + LEFT_MOTOR_OFFSET_BACKWARD);
-			rightMotor.set(speed * RIGHT_MOTOR_BIAS_FORWARD + RIGHT_MOTOR_OFFSET_FORWARD);
-		}
-		else if (speed > 0) {
-			leftMotor.set(speed * LEFT_MOTOR_BIAS_FORWARD + LEFT_MOTOR_OFFSET_FORWARD);
-			rightMotor.set(speed * RIGHT_MOTOR_BIAS_BACKWARD + RIGHT_MOTOR_OFFSET_BACKWARD);
-		}
-		else {
-			leftMotor.set(0);
-			rightMotor.set(0);
-		}
+		leftMotor.set(-1*speed);
+		rightMotor.set(speed);
 	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
