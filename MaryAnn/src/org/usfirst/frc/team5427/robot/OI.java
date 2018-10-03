@@ -57,10 +57,10 @@ public class OI
 		elevatorUp = new JoystickButton(joy,Config.BUTTON_ELEVATOR_UP);
 		elevatorDown = new JoystickButton(joy,Config.BUTTON_ELEVATOR_DOWN);
 		
-		motorIntakeIn.whileHeld(new IntakeActivateIn());
-		motorIntakeOut.whileHeld(new IntakeActivateOut());
-//		elevatorUp.whileHeld(new ElevatorUp());
-//		elevatorDown.whileHeld(new ElevatorDown());
+		motorIntakeIn.whenPressed(new IntakeActivateIn());
+		motorIntakeOut.whenPressed(new IntakeActivateOut());
+//		elevatorUp.whenPressed(new ElevatorUp());
+//		elevatorDown.whenPressed(new ElevatorDown());
 		
 	}
 	public Joystick getJoy() {

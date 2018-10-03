@@ -1,7 +1,5 @@
 package org.usfirst.frc.team5427.robot.subsystems;
 
-//import org.usfirst.frc.team5427.util.SameLine;
-
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -16,20 +14,30 @@ public class Intake extends Subsystem
 		this.rightFlywheel = rightFlywheel;
 	}
 	public void setSpeed(double speed) {
-		if (speed < 0 || speed > 0){
+		if (speed < 0)
+		{
 			leftFlywheel.set(speed);
 			rightFlywheel.set(speed);
 		}
-		else {
+		else if(speed > 0)
+		{
+			leftFlywheel.set(speed);
+			rightFlywheel.set(speed);
+		}
+		else
+		{
 			leftFlywheel.set(0);
 			rightFlywheel.set(0);
 		}
 	}
-	
 	@Override
-	protected void initDefaultCommand()
-	{
+	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
+		
+	}
+	public void stop()
+	{
+		setSpeed(0);
 	}
 
 }

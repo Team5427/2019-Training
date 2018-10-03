@@ -2,9 +2,9 @@ package org.usfirst.frc.team5427.robot.commands;
 
 import org.usfirst.frc.team5427.robot.Robot;
 import org.usfirst.frc.team5427.util.Config;
-//import org.usfirst.frc.team5427.util.SameLine;
 
 import edu.wpi.first.wpilibj.command.Command;
+
 public class IntakeActivateOut extends Command{
 
 	public IntakeActivateOut()
@@ -12,7 +12,7 @@ public class IntakeActivateOut extends Command{
 		requires(Robot.intakeSubsystem);
 	}
 	
-	protected void Initialize()
+	protected void initialize()
 	{
 		this.setInterruptible(true);
 	}
@@ -25,15 +25,15 @@ public class IntakeActivateOut extends Command{
 	protected boolean isFinished()
 	{
 		if(!Robot.oi.getJoy().getRawButton(Config.BUTTON_MOTOR_INTAKE_OUT))
-			return false;
-		else
 			return true;
+		else
+			return false;
 	}
 	protected void end()
 	{
 		Robot.intakeSubsystem.setSpeed(0);
 	}
-	protected void intterupted()
+	protected void interupted()
 	{
 		end();
 	}
