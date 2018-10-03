@@ -59,8 +59,8 @@ public class OI
 		
 		motorIntakeIn.whenPressed(new IntakeActivateIn());
 		motorIntakeOut.whenPressed(new IntakeActivateOut());
-//		elevatorUp.whenPressed(new ElevatorUp());
-//		elevatorDown.whenPressed(new ElevatorDown());
+		elevatorUp.whenPressed(Robot.meu);
+		elevatorDown.whenPressed(Robot.med);
 		
 	}
 	public Joystick getJoy() {

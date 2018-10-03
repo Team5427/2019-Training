@@ -56,7 +56,7 @@ public class Robot extends IterativeRobot {
 	
 	public static SpeedController elevator_Left;
 	public static SpeedController elevator_Right;
-	public static DigitalInput elevatorLimitSwithUp;
+	public static DigitalInput elevatorLimitSwitchUp;
 	public static DigitalInput elevatorLimitSwitchDown;
 	
 	public static Intake intakeSubsystem;
@@ -90,7 +90,8 @@ public class Robot extends IterativeRobot {
 		inTake_Right = new PWMVictorSPX(Config.INTAKE_MOTOR_RIGHT);
 		intakeSubsystem = new Intake(inTake_Left, inTake_Right);
 
-		elevatorLimitSwithUp = new DigitalInput(Config.ELEVATOR_LIMIT_SWITCH_UP);
+		elevatorLimitSwitchUp = new DigitalInput(Config.ELEVATOR_LIMIT_SWITCH_UP);
+		elevatorLimitSwitchUp.setSubsystem("ELSU");
 		elevatorLimitSwitchDown = new DigitalInput(Config.ELEVATOR_LIMIT_SWITCH_DOWN);
 		elevator_Left = new PWMVictorSPX(Config.ELEVATOR_MOTOR_LEFT);
 		elevator_Right = new PWMVictorSPX(Config.ELEVATOR_MOTOR_RIGHT);

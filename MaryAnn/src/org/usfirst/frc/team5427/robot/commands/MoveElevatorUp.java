@@ -7,9 +7,9 @@
 
 package org.usfirst.frc.team5427.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team5427.robot.Robot;
 import org.usfirst.frc.team5427.util.Config;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * An example command.  You can replace me with your own command.
@@ -19,9 +19,7 @@ public class MoveElevatorUp extends Command {
 
 	// Called just before this Command runs the first time
 	@Override
-	protected void initialize() {
-		this.setInterruptible(true);
-	}
+	protected void initialize() {this.setInterruptible(true);}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
@@ -33,8 +31,8 @@ public class MoveElevatorUp extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	public boolean isFinished() {
-		Robot.elevatorLimitSwithUp.get();
-		return (!Robot.oi.getJoy().getRawButton(Config.BUTTON_ELEVATOR_UP) || !Robot.elevatorLimitSwithUp.get());
+		Robot.elevatorLimitSwitchUp.get();
+		return (!Robot.oi.getJoy().getRawButton(Config.BUTTON_ELEVATOR_UP) || !Robot.elevatorLimitSwitchUp.get());
 	}
 
 	// Called once after isFinished returns true
