@@ -24,7 +24,7 @@ public class MoveElevatorUp extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.elevator_Left.set(Config.ELEVATOR_MOTOR_SPEED_UP);
+		Robot.elevator_Left.set(-Config.ELEVATOR_MOTOR_SPEED_UP);
 		Robot.elevator_Right.set(Config.ELEVATOR_MOTOR_SPEED_UP);
 	}
 
