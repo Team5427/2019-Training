@@ -1,6 +1,8 @@
 package org.usfirst.frc.team5427.robot;
 import org.usfirst.frc.team5427.robot.commands.IntakeActivateIn;
 import org.usfirst.frc.team5427.robot.commands.IntakeActivateOut;
+import org.usfirst.frc.team5427.robot.commands.TiltDown;
+import org.usfirst.frc.team5427.robot.commands.TiltUp;
 import org.usfirst.frc.team5427.util.Config;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -48,6 +50,8 @@ public class OI
 	public Button motorIntakeOut;
 	public Button elevatorUp;
 	public Button elevatorDown;
+	public Button tiltUp;
+	public Button tiltDown;
 	
 	public OI()
 	{
@@ -56,11 +60,17 @@ public class OI
 		motorIntakeOut 	= new JoystickButton(joy, Config.BUTTON_MOTOR_INTAKE_OUT);
 		elevatorUp = new JoystickButton(joy,Config.BUTTON_ELEVATOR_UP);
 		elevatorDown = new JoystickButton(joy,Config.BUTTON_ELEVATOR_DOWN);
+		tiltUp = new JoystickButton(joy,Config.BUTTON_INTAKE_TILTER_UP);
+		tiltDown = new JoystickButton(joy,Config.BUTTON_INTAKE_TILTER_DOWN);
 		
 		motorIntakeIn.whenPressed(new IntakeActivateIn());
 		motorIntakeOut.whenPressed(new IntakeActivateOut());
 		elevatorUp.whenPressed(Robot.meu);
 		elevatorDown.whenPressed(Robot.med);
+		tiltUp.whenPressed(new TiltUp());
+		tiltDown.whenPressed(new TiltDown());
+		
+		
 		
 	}
 	public Joystick getJoy() {
