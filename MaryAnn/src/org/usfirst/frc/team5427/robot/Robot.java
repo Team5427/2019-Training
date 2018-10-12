@@ -8,6 +8,7 @@
 package org.usfirst.frc.team5427.robot;
 
 
+import org.usfirst.frc.team5427.robot.commands.DriveForward;
 import org.usfirst.frc.team5427.robot.commands.DriveWithJoystick;
 import org.usfirst.frc.team5427.robot.commands.MoveElevatorDown;
 import org.usfirst.frc.team5427.robot.commands.MoveElevatorUp;
@@ -25,6 +26,7 @@ import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -69,7 +71,7 @@ public class Robot extends IterativeRobot {
 	public static MoveElevatorUp meu = new MoveElevatorUp();
 	public static MoveElevatorDown med = new MoveElevatorDown();
 	
-	
+	DriveForward driveForward;
 
 //	Command m_autonomousCommand;
 //	SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -102,6 +104,8 @@ public class Robot extends IterativeRobot {
 		tilt = new PWMVictorSPX(Config.TILT_INTAKE_MOTOR);
 		
 		oi = new OI();
+		
+		driveForward = new DriveForward(2);
 	}
 
 	/**
@@ -130,30 +134,16 @@ public class Robot extends IterativeRobot {
 	 * chooser code above (like the commented example) or additional comparisons
 	 * to the switch structure below with additional strings & commands.
 	 */
-//	@Override
-//	public void autonomousInit() {
-//		m_autonomousCommand = m_chooser.getSelected();
-//
-//		/*
-//		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-//		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-//		 * = new MyAutoCommand(); break; case "Default Auto": default:
-//		 * autonomousCommand = new ExampleCommand(); break; }
-//		 */
-//
-//		// schedule the autonomous command (example)
-//		if (m_autonomousCommand != null) {
-//			m_autonomousCommand.start();
-//		}
-//	}
+	@Override
+	public void autonomousInit() 
+	{
+		driveForward.start();
+	}
 
-	/**
-	 * This function is called periodically during autonomous.
-	 */
-//	@Override
-//	public void autonomousPeriodic() {
-//		Scheduler.getInstance().run();
-//	}
+	@Override
+	public void autonomousPeriodic() {
+		Scheduler.getInstance().run();
+	}
 
 //	@Override
 //	public void teleopInit() {
