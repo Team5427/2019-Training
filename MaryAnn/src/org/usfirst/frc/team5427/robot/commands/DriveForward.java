@@ -21,7 +21,7 @@ public class DriveForward extends Command{
 	}
 	
 	@Override
-	protected boolean isFinished() 
+	public boolean isFinished() 
 	{
 		return this.isTimedOut();
 	}

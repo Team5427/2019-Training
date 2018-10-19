@@ -10,6 +10,8 @@ package org.usfirst.frc.team5427.robot;
 
 import org.usfirst.frc.team5427.robot.commands.DriveForward;
 import org.usfirst.frc.team5427.robot.commands.DriveWithJoystick;
+import org.usfirst.frc.team5427.robot.commands.DropCube;
+import org.usfirst.frc.team5427.robot.commands.ElevatorUp;
 import org.usfirst.frc.team5427.robot.commands.MoveElevatorDown;
 import org.usfirst.frc.team5427.robot.commands.MoveElevatorUp;
 import org.usfirst.frc.team5427.robot.subsystems.DriveTrain;
@@ -72,6 +74,8 @@ public class Robot extends IterativeRobot {
 	public static MoveElevatorDown med = new MoveElevatorDown();
 	
 	DriveForward driveForward;
+	ElevatorUp elevatorUp;
+	DropCube dropCube;
 
 //	Command m_autonomousCommand;
 //	SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -106,6 +110,8 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		
 		driveForward = new DriveForward(2);
+		elevatorUp = new ElevatorUp(2);
+		dropCube = new DropCube(1);
 	}
 
 	/**
@@ -138,11 +144,17 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() 
 	{
 		driveForward.start();
+		elevatorUp.start();
+			
 	}
 
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		if(driveForward.isFinished() && elevatorUp.isFinished())
+		{
+			dropCube.start();
+		}
 	}
 
 //	@Override
