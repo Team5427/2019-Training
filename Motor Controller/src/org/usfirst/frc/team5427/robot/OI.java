@@ -6,8 +6,13 @@
 /*----------------------------------------------------------------------------*/
 package org.usfirst.frc.team5427.robot;
 
+import org.usfirst.frc.team5427.robot.commands.ElevatorDown;
+import org.usfirst.frc.team5427.robot.commands.ElevatorUp;
 import org.usfirst.frc.team5427.robot.commands.IntakeActivateIn;
 import org.usfirst.frc.team5427.robot.commands.IntakeActivateOut;
+import org.usfirst.frc.team5427.robot.commands.TiltDown;
+import org.usfirst.frc.team5427.robot.commands.TiltUp;
+import org.usfirst.frc.team5427.util.Config;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -23,16 +28,21 @@ public class OI {
 	Button motorIntakeOut;
 	Button elevatorUp;
 	Button elevatorDown;
+	Button tiltUp, tiltDown;
 	public OI() {
 		joy1 = new Joystick(0);
-		motorIntakeIn = new JoystickButton(joy1, 7);
-		motorIntakeOut = new JoystickButton(joy1, 1);
-		elevatorUp = new JoystickButton(joy1, 5);
-		elevatorDown = new JoystickButton(joy1, 3);
+		motorIntakeIn = new JoystickButton(joy1, Config.BUTTON_MOTOR_INTAKE_IN);
+		motorIntakeOut = new JoystickButton(joy1, Config.BUTTON_MOTOR_INTAKE_OUT);
+		elevatorUp = new JoystickButton(joy1, Config.BUTTON_ELEVATOR_UP);
+		elevatorDown = new JoystickButton(joy1, Config.BUTTON_ELEVATOR_DOWN);
+		tiltUp = new JoystickButton(joy1, Config.BUTTON_INTAKE_TILTER_UP);
+		tiltDown = new JoystickButton(joy1, Config.BUTTON_INTAKE_TILTER_DOWN);
 		motorIntakeIn.whenPressed(new IntakeActivateIn());
 		motorIntakeOut.whenPressed(new IntakeActivateOut());
-		elevatorUp.whenPressed(Robot.mou);
-		elevatorDown.whenPressed(Robot.mod);
+		elevatorUp.whenPressed(new ElevatorUp());
+		elevatorDown.whenPressed(new ElevatorDown());
+		tiltUp.whenPressed(new TiltUp());
+		tiltDown.whenPressed(new TiltDown());
 	}
 
 	/**

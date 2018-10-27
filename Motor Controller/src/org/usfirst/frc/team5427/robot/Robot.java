@@ -12,9 +12,13 @@ package org.usfirst.frc.team5427.robot;
 import org.usfirst.frc.team5427.robot.commands.DriveWithJoystick;
 import org.usfirst.frc.team5427.robot.commands.ElevatorDown;
 import org.usfirst.frc.team5427.robot.commands.ElevatorUp;
+import org.usfirst.frc.team5427.robot.commands.TimedForward;
 import org.usfirst.frc.team5427.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5427.robot.subsystems.Elevator;
 import org.usfirst.frc.team5427.robot.subsystems.Intake;
+import org.usfirst.frc.team5427.robot.subsystems.Tilt;
+import org.usfirst.frc.team5427.util.Config;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
@@ -35,28 +39,37 @@ import edu.wpi.first.wpilibj.Spark;
  * range from -1 to 1 making it easy to work together.
  */
 public class Robot extends TimedRobot {
-	private static final int frontRightPort = 6;
-	private static final int frontLeftPort = 3;
-	private static final int backLeftPort = 1;
-	private static final int backRightPort = 0;
+	private static final int frontRightPort = Config.FRONT_RIGHT_MOTOR;
+	private static final int frontLeftPort = Config.FRONT_LEFT_MOTOR;
+	private static final int backLeftPort = Config.REAR_LEFT_MOTOR;
+	private static final int backRightPort = Config.REAR_RIGHT_MOTOR;
 	public static SpeedControllerGroup spgRight;
 	public static SpeedControllerGroup spgLeft;
 	public static DifferentialDrive drive;
 	private SpeedController fr_motor, fl_motor, br_motor, bl_motor;
+	private PWMVictorSPX elevLeft, elevRight;
+	private PWMVictorSPX intakeLeft, intakeRight;
+	private PWMVictorSPX tiltMtr;
 	private Joystick m_joystick;
 	public static DriveTrain driveTrain;
 	public static Intake intake;
 	public static OI oi;
-	public static ElevatorUp mou;
-	public static ElevatorDown mod;
 	public static Elevator elevator;
 	public static DigitalInput elevLimSwiUp, elevLimSwiDown;
+	public static Tilt tilt;
+	public static TimedForward tf;
 	@Override
 	public void robotInit() {
-		elevLimSwiUp = new DigitalInput(5);
-		elevLimSwiDown = new DigitalInput(4);
-		elevator = new Elevator(new PWMVictorSPX(4), new PWMVictorSPX(9));
-		intake = new Intake(new PWMVictorSPX(7), new PWMVictorSPX(8));
+		elevLimSwiUp = new DigitalInput(Config.ELEVATOR_LIMIT_SWITCH_UP);
+		elevLimSwiDown = new DigitalInput(Config.ELEVATOR_LIMIT_SWITCH_DOWN);
+		elevLeft = new PWMVictorSPX(Config.ELEVATOR_MOTOR_LEFT);
+		elevRight =  new PWMVictorSPX(Config.ELEVATOR_MOTOR_RIGHT);
+		elevator = new Elevator(elevLeft, elevRight);
+		intakeLeft = new PWMVictorSPX(Config.INTAKE_MOTOR_LEFT);
+		intakeRight =  new PWMVictorSPX(Config.INTAKE_MOTOR_RIGHT);
+		intake = new Intake(intakeLeft,intakeRight);
+		tiltMtr = new PWMVictorSPX(Config.TILT_INTAKE_MOTOR);
+		tilt = new Tilt(tiltMtr);
 		oi = new OI();
 		fr_motor = new PWMVictorSPX(frontRightPort);
 		br_motor = new PWMVictorSPX(backRightPort);
@@ -71,7 +84,7 @@ public class Robot extends TimedRobot {
 	}
 	@Override
 	public void disabledInit() {
-
+		
 	}
 
 	@Override
@@ -92,7 +105,9 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-
+		tf = new TimedForward(5);
+		
+		tf.start();
 	}
 
 	/**
@@ -100,7 +115,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-
+		Scheduler.getInstance().run();
 	}
 
 
@@ -109,7 +124,10 @@ public class Robot extends TimedRobot {
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
-		// this line or comment it out.		
+		// this line or comment it out.
+		
+		
+		
 	}
 
 	/**
