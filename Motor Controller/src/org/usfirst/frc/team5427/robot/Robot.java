@@ -59,12 +59,12 @@ public class Robot extends TimedRobot {
 		intake = new Intake(new PWMVictorSPX(7), new PWMVictorSPX(8));
 		oi = new OI();
 		fr_motor = new PWMVictorSPX(frontRightPort);
-		br_motor = new PWMVictorSPX(frontLeftPort);
-		fl_motor = new PWMVictorSPX(backRightPort);
+		br_motor = new PWMVictorSPX(backRightPort);
+		fl_motor = new PWMVictorSPX(frontLeftPort);
 		bl_motor = new PWMVictorSPX(backLeftPort);
 		m_joystick = new Joystick(0);
 		spgRight = new SpeedControllerGroup(fr_motor, br_motor);
-		spgLeft = new SpeedControllerGroup(br_motor, bl_motor);
+		spgLeft = new SpeedControllerGroup(fl_motor, bl_motor);
 		drive = new DifferentialDrive(spgLeft, spgRight);
 		driveTrain = new DriveTrain(spgLeft, spgRight, drive);
 		drive.setSafetyEnabled(false);
