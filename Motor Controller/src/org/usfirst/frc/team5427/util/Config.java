@@ -223,5 +223,11 @@ public class Config {
 	 */
 	public static final int ALT_JOYSTICK_PORT = 0;
 
+	/************** ENCODER PORTS AND VALUE *****************/
+	
+	public static final int ENCODER_LEFT_CHANNEL_A = 0;
+	
+	public static final int ENCODER_LEFT_CHANNEL_B = 1;
 
+	public static final double ENCODER_DISTANCE_OFFSET = 0.9752;
 }

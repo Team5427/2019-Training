@@ -12,6 +12,7 @@ package org.usfirst.frc.team5427.robot;
 import org.usfirst.frc.team5427.robot.commands.DriveWithJoystick;
 import org.usfirst.frc.team5427.robot.commands.ElevatorDown;
 import org.usfirst.frc.team5427.robot.commands.ElevatorUp;
+import org.usfirst.frc.team5427.robot.commands.PIDDistance;
 import org.usfirst.frc.team5427.robot.commands.TimedForward;
 import org.usfirst.frc.team5427.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5427.robot.subsystems.Elevator;
@@ -20,6 +21,7 @@ import org.usfirst.frc.team5427.robot.subsystems.Tilt;
 import org.usfirst.frc.team5427.util.Config;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
@@ -58,6 +60,8 @@ public class Robot extends TimedRobot {
 	public static DigitalInput elevLimSwiUp, elevLimSwiDown;
 	public static Tilt tilt;
 	public static TimedForward tf;
+	public static Encoder encLeft;
+
 	@Override
 	public void robotInit() {
 		elevLimSwiUp = new DigitalInput(Config.ELEVATOR_LIMIT_SWITCH_UP);
@@ -81,6 +85,8 @@ public class Robot extends TimedRobot {
 		drive = new DifferentialDrive(spgLeft, spgRight);
 		driveTrain = new DriveTrain(spgLeft, spgRight, drive);
 		drive.setSafetyEnabled(false);
+		encLeft = new Encoder(Config.ENCODER_LEFT_CHANNEL_A, Config.ENCODER_LEFT_CHANNEL_B, false, Encoder.EncodingType.k4X);
+		encLeft.setDistancePerPulse(Config.ENCODER_DISTANCE_OFFSET*(6.00 * Math.PI / 360));
 	}
 	@Override
 	public void disabledInit() {
@@ -105,8 +111,10 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		tf = new TimedForward(2);
-		tf.start();
+//		tf = new TimedForward(2);
+//		tf.start();
+		PIDDistance pd = new PIDDistance(1,0,0,60,0.6);
+		pd.start();
 	}
 
 	/**
