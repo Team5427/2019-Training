@@ -14,13 +14,14 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
  */
-public class DriveTrain extends Subsystem {
+public class DriveTrain extends PIDSubsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	
@@ -39,11 +40,13 @@ public class DriveTrain extends Subsystem {
 	 * @param drive
 	 *            the Drive Train that is created inside of Robot.java.
 	 */
-	public DriveTrain(SpeedControllerGroup drive_Left, SpeedControllerGroup drive_Right, DifferentialDrive drive) {
-
+	public DriveTrain(SpeedControllerGroup drive_Left, SpeedControllerGroup drive_Right, DifferentialDrive drive, double p, double i, double d) {
+		super(p,i,d);
+		
 		this.m_drive = drive;
 		this.m_left = drive_Left;
 		this.m_right = drive_Right;
+		getPIDController().setContinuous(false);
 	}
 	
 	/**
@@ -76,5 +79,18 @@ public class DriveTrain extends Subsystem {
 	 */
 	public void stop() {
 		m_drive.stopMotor();
+	}
+
+	@Override
+	protected double returnPIDInput() {
+		// TODO Auto-generated method stub
+		return Robot.encLeft.getDistance();
+	}
+
+	@Override
+	protected void usePIDOutput(double output) {
+		// TODO Auto-generated method stub
+		m_left.pidWrite(output);
+		m_right.pidWrite(output);
 	}
 }

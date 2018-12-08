@@ -9,34 +9,29 @@ import edu.wpi.first.wpilibj.command.PIDCommand;
 /**
  *
  */
-public class PIDDistance extends PIDCommand {
+public class PIDDistance extends Command {
 
 	public static double speed;
-	public static boolean timeStarted;
-    public PIDDistance(double p, double i, double d, double setPoint, double speed) {
-    	super(p, i, d);
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	this.speed = speed;
-    	requires(Robot.driveTrain);
-    	getPIDController().setOutputRange(-1f, 1f);
-		getPIDController().setSetpoint(setPoint);
+	//public static boolean timeStarted;
+	public static double setPoint;
+	public static double p, i, d;
+    public PIDDistance(double setPoint) {
+    	this.setPoint = setPoint;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	super.getPIDController().enable();
-    	timeStarted = false;
+    	//timeStarted = false;
+    	Robot.driveTrain.setSetpoint(setPoint);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.spgRight.set(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	double distFromSetpoint = Math.abs(getPIDController().getSetpoint()- (Math.abs(Robot.encLeft.getDistance())));
+    	double distFromSetpoint = Math.abs(Robot.driveTrain.getSetpoint()- Robot.driveTrain.getPosition());
 		boolean inRange = distFromSetpoint < 10f;
 		return inRange;
     }
@@ -53,15 +48,5 @@ public class PIDDistance extends PIDCommand {
     	end();
     }
 
-	@Override
-	protected double returnPIDInput() {
-		// TODO Auto-generated method stub
-		return Math.abs(Robot.encLeft.getDistance());
-	}
 
-	@Override
-	protected void usePIDOutput(double output) {
-		// TODO Auto-generated method stub
-		Robot.spgLeft.pidWrite(output);
-	}
 }

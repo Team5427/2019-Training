@@ -76,14 +76,14 @@ public class Robot extends TimedRobot {
 		tilt = new Tilt(tiltMtr);
 		oi = new OI();
 		fr_motor = new PWMVictorSPX(frontRightPort);
-		br_motor = new PWMVictorSPX(backRightPort);
-		fl_motor = new PWMVictorSPX(frontLeftPort);
+		br_motor = new PWMVictorSPX(frontLeftPort);
+		fl_motor = new PWMVictorSPX(backRightPort);
 		bl_motor = new PWMVictorSPX(backLeftPort);
 		m_joystick = new Joystick(0);
 		spgRight = new SpeedControllerGroup(fr_motor, br_motor);
-		spgLeft = new SpeedControllerGroup(fl_motor, bl_motor);
+		spgLeft = new SpeedControllerGroup(br_motor, bl_motor);
 		drive = new DifferentialDrive(spgLeft, spgRight);
-		driveTrain = new DriveTrain(spgLeft, spgRight, drive);
+		driveTrain = new DriveTrain(spgLeft, spgRight, drive, 1, 0, 0);
 		drive.setSafetyEnabled(false);
 		encLeft = new Encoder(Config.ENCODER_LEFT_CHANNEL_A, Config.ENCODER_LEFT_CHANNEL_B, false, Encoder.EncodingType.k4X);
 		encLeft.setDistancePerPulse(Config.ENCODER_DISTANCE_OFFSET*(6.00 * Math.PI / 360));
@@ -113,9 +113,8 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 //		tf = new TimedForward(2);
 //		tf.start();
-		PIDDistance pd = new PIDDistance(1,0,0,60,0.6);
+		PIDDistance pd = new PIDDistance(30.0);
 		pd.start();
-
 	}
 
 	/**
