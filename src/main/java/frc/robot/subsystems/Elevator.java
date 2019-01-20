@@ -11,10 +11,10 @@ public class Elevator extends Subsystem
 	public static final int ELEVATOR_LIMIT_SWITCH_UP = 5;
 	public static final int ELEVATOR_LIMIT_SWITCH_DOWN = 4;
 
-	private static PWMVictorSPX leftMotor;
-	private static PWMVictorSPX rightMotor;
-	private static DigitalInput limitUp;
-	private static DigitalInput limitDown;
+	private PWMVictorSPX leftMotor;
+	private PWMVictorSPX rightMotor;
+	private DigitalInput limitUp;
+	private DigitalInput limitDown;
 
 	public Elevator()
 	{

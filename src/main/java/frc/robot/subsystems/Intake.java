@@ -19,9 +19,9 @@ public class Intake extends Subsystem
 	public static final double RIGHT_OFFSET_FORWARD = 0;
 	public static final double RIGHT_OFFSET_BACKWARD = 0;
 
-	private static PWMVictorSPX left;
-	private static PWMVictorSPX right;
-	private static PWMVictorSPX tilt;
+	private PWMVictorSPX left;
+	private PWMVictorSPX right;
+	private PWMVictorSPX tilt;
 
 	public Intake()
 	{

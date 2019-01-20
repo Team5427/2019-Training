@@ -5,25 +5,23 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class TurnAngle extends Command implements PIDOutput
+public class DriveDistance extends Command implements PIDOutput
 {
     public static final double kp = 0.03;
     public static final double ki = 0;
     public static final double kd = 0;
-    public static final double kToleranceDegrees = 1;
+    public static final double kToleranceInches = 1;
 
     private PIDController controller;
     private double leftSpeed;
     private double rightSpeed;
 
-    public TurnAngle(double angleDegrees)
+    public DriveDistance(double distanceInches)
     {
         controller = new PIDController(kp, ki, kd, Robot.sensor.ahrs, this);
-        controller.setSetpoint(angleDegrees);
-        controller.setInputRange(-180, 180);
+        controller.setSetpoint(distanceInches);
         controller.setOutputRange(-1, 1);
-        controller.setAbsoluteTolerance(kToleranceDegrees);
-        controller.setContinuous(true);
+        controller.setAbsoluteTolerance(kToleranceInches);
     }
 
     @Override
@@ -35,7 +33,7 @@ public class TurnAngle extends Command implements PIDOutput
     @Override
     protected void execute()
     {
-        Robot.drivetrain.tankDrive(leftSpeed, rightSpeed);
+        Robot.drivetrain.tankDrive(leftSpeed, -rightSpeed);
     }
 
     @Override

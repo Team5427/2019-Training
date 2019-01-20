@@ -12,8 +12,8 @@ public class Sensor extends Subsystem
 	public static final int LEFT_B = 1;
 	public static final int WHEEL_CIRCUMFERENCE_INCHES = 1;
 
-    public static Encoder encoder;
-    public static AHRS ahrs;
+    public Encoder encoder;
+    public AHRS ahrs;
 
     public Sensor()
     {

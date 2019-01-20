@@ -13,13 +13,13 @@ public class Drivetrain extends Subsystem
 	public static final int FRONT_LEFT_MOTOR = 1;
 	public static final int REAR_LEFT_MOTOR = 0;
 
-	private static PWMVictorSPX frontLeft;
-	private static PWMVictorSPX rearLeft;
-	private static SpeedControllerGroup leftMotor;
-	private static PWMVictorSPX frontRight;
-	private static PWMVictorSPX rearRight;
-	private static SpeedControllerGroup rightMotor;
-	private static DifferentialDrive drive;
+	private PWMVictorSPX frontLeft;
+	private PWMVictorSPX rearLeft;
+	private SpeedControllerGroup leftMotor;
+	private PWMVictorSPX frontRight;
+	private PWMVictorSPX rearRight;
+	private SpeedControllerGroup rightMotor;
+	private DifferentialDrive drive;
 
 	public Drivetrain()
 	{
