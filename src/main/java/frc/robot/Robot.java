@@ -7,11 +7,10 @@
 
 package frc.robot;
 
-import frc.robot.commands.TeleOp;
-import frc.robot.commands.TrainingCommand;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Sensor;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -28,27 +27,17 @@ public class Robot extends TimedRobot
 	public static Drivetrain drivetrain = new Drivetrain();
 	public static Elevator elevator = new Elevator();
 	public static Intake intake = new Intake();
+	public static Sensor sensor = new Sensor();
 	public static OI oi = new OI();
-	
-	/**
-	 * This function is run when the robot is first started up and should be
-	 * used for any initialization code.
-	 */
+
 	@Override
 	public void robotInit()
 	{
-		
 	}
 
-	/**
-	 * This function is called once each time the robot enters Disabled mode.
-	 * You can use it to reset any subsystem information you want to clear when
-	 * the robot is disabled.
-	 */
 	@Override
 	public void disabledInit()
 	{
-
 	}
 
 	@Override
@@ -57,27 +46,11 @@ public class Robot extends TimedRobot
 		Scheduler.getInstance().run();
 	}
 
-	/**
-	 * This autonomous (along with the chooser code above) shows how to select
-	 * between different autonomous modes using the dashboard. The sendable
-	 * chooser code works with the Java SmartDashboard. If you prefer the
-	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-	 * getString code to get the auto name from the text box below the Gyro
-	 *
-	 * <p>You can add additional auto modes by adding additional commands to the
-	 * chooser code above (like the commented example) or additional comparisons
-	 * to the switch structure below with additional strings & commands.
-	 */
 	@Override
 	public void autonomousInit()
 	{
-		TrainingCommand trainingCommand = new TrainingCommand();
-		trainingCommand.start();
 	}
 
-	/**
-	 * This function is called periodically during autonomous.
-	 */
 	@Override
 	public void autonomousPeriodic()
 	{
@@ -87,25 +60,18 @@ public class Robot extends TimedRobot
 	@Override
 	public void teleopInit()
 	{
-		TeleOp teleop = new TeleOp();
-		teleop.start();
 	}
 
-	/**
-	 * This function is called periodically during operator control.
-	 */
 	@Override
 	public void teleopPeriodic()
 	{
+		Robot.drivetrain.joystickDrive();
+		System.out.println(Robot.sensor.getDistance());
 		Scheduler.getInstance().run();
 	}
 
-	/**
-	 * This function is called periodically during test mode.
-	 */
 	@Override
 	public void testPeriodic()
 	{
-
 	}
 }

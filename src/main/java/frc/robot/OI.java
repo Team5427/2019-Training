@@ -24,6 +24,22 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI
 {
+	public static final int BUTTON_INTAKE_IN = 7;
+	public static final int BUTTON_INTAKE_OUT = 1;
+	public static final int BUTTON_INTAKE_SLOW = 2;
+	public static final int BUTTON_ELEVATOR_UP = 5;
+	public static final int BUTTON_ELEVATOR_DOWN = 3;
+	public static final int BUTTON_TOGGLE_TILTER = 8;
+	public static final int BUTTON_TILTER_UP = 6;
+	public static final int BUTTON_TILTER_DOWN = 4;
+	public static final int BUTTON_ELEVATOR_DOWN_MANUAL = 11;
+
+	public static final int JOYSTICK_PORT = 0;
+	public static final int ALT_JOYSTICK_PORT = 0;
+	public static final int ONE_JOYSTICK = 0;
+	public static final int TWO_JOYSTICKS = 1;
+	public static final int JOYSTICK_MODE = ONE_JOYSTICK;
+
 	public static Joystick joystick;
 	private static JoystickButton intakeIn;
 	private static JoystickButton intakeOut;
@@ -35,14 +51,14 @@ public class OI
 
 	public OI()
 	{
-		joystick = new Joystick(RobotMap.JOYSTICK_PORT);
-		elevUp = new JoystickButton(joystick, RobotMap.BUTTON_ELEVATOR_UP);
-		elevDown = new JoystickButton(joystick, RobotMap.BUTTON_ELEVATOR_DOWN);
-		intakeIn = new JoystickButton(joystick, RobotMap.BUTTON_INTAKE_IN);
-		intakeOut = new JoystickButton(joystick, RobotMap.BUTTON_INTAKE_OUT);
-		intakeSlow = new JoystickButton(joystick, RobotMap.BUTTON_INTAKE_SLOW);
-		tiltUp = new JoystickButton(joystick, RobotMap.BUTTON_TILTER_UP);
-		tiltDown = new JoystickButton(joystick, RobotMap.BUTTON_TILTER_DOWN);
+		joystick = new Joystick(JOYSTICK_PORT);
+		elevUp = new JoystickButton(joystick, BUTTON_ELEVATOR_UP);
+		elevDown = new JoystickButton(joystick, BUTTON_ELEVATOR_DOWN);
+		intakeIn = new JoystickButton(joystick, BUTTON_INTAKE_IN);
+		intakeOut = new JoystickButton(joystick, BUTTON_INTAKE_OUT);
+		intakeSlow = new JoystickButton(joystick, BUTTON_INTAKE_SLOW);
+		tiltUp = new JoystickButton(joystick, BUTTON_TILTER_UP);
+		tiltDown = new JoystickButton(joystick, BUTTON_TILTER_DOWN);
 
 		elevUp.whileHeld(new ElevUp(0));
 		elevDown.whileHeld(new ElevDown(0));

@@ -21,7 +21,6 @@ public class ElevUp extends Command
 	@Override
 	protected void initialize()
 	{
-		this.setInterruptible(true);
 	}
 
 	@Override

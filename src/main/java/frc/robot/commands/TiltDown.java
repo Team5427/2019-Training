@@ -19,6 +19,11 @@ public class TiltDown extends Command
 	}
 
 	@Override
+	protected void initialize()
+	{
+	}
+
+	@Override
 	protected void execute()
 	{
 		Robot.intake.tilt(RobotMap.MOTORSPEED_TILTER_DOWN);

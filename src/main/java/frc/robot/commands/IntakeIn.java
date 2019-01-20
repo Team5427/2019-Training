@@ -18,11 +18,10 @@ public class IntakeIn extends Command
 		}
 		requires(Robot.intake);
 	}
-	
+
 	@Override
 	protected void initialize()
 	{
-		this.setInterruptible(true);
 	}
 
 	@Override
@@ -38,7 +37,7 @@ public class IntakeIn extends Command
 		{
 			return this.isTimedOut();
 		}
-		return !(OI.joystick.getRawButton(RobotMap.BUTTON_INTAKE_IN));
+		return !(OI.joystick.getRawButton(OI.BUTTON_INTAKE_IN));
 	}
 
 	@Override

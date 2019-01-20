@@ -4,13 +4,12 @@ package frc.robot;
  * This file will store ALL of the variables, offsets, measurements, etc. that
  * our robot will use during the year. All variables are to be static, and
  * nothing in this file should ever have to be initiated.
- * 
+ *
  * @author Andrew Kennedy, Bo Corman
  */
 
 public class RobotMap
 {
-
 	/**
 	 * The name of our program as per the robot.
 	 */
@@ -26,51 +25,9 @@ public class RobotMap
 	 */
 	public static final boolean LOGGING = true;
 
-	/******************** PWM PORTS *******************/
-	
-	/**
-	 * The PWM value for the front right motor of the drive train.
-	 */
-	public static final int FRONT_RIGHT_MOTOR = 3;
 
-	/**
-	 * The PWM value for the rear right motor of the drive train.
-	 */
-	public static final int REAR_RIGHT_MOTOR = 6;
+	/* PWM PORTS */
 
-	/**
-	 * The PWM value for the front left motor of the drive train.
-	 */
-	public static final int FRONT_LEFT_MOTOR = 1;
-
-	/**
-	 * The PWM value for the rear left motor of the drive train.
-	 */
-	public static final int REAR_LEFT_MOTOR = 0;
-
-	/**
-	 * The PWM value for the left motor of the intake.
-	 */
-	public static final int INTAKE_MOTOR_LEFT = 7;
-
-	/**
-	 * The PWM value for the right motor of the intake.
-	 */
-	public static final int INTAKE_MOTOR_RIGHT = 8;
-
-	/**
-	 * The PWM value for the right motor of the elevator.
-	 */
-	public static final int ELEVATOR_MOTOR_RIGHT = 9;
-	/**
-	 * The PWM value for the left motor of the elevator.
-	 */
-	public static final int ELEVATOR_MOTOR_LEFT = 4;
-
-	/**
-	 * The PWM value for the motor of the intake tilt.
-	 */
-	public static final int TILT_INTAKE_MOTOR = 5;
 
 	/**
 	 * The PWM value for the motor of the climber arm.
@@ -82,38 +39,15 @@ public class RobotMap
 	 */
 	public static final int CLIMBER_MOTOR = 10;
 
-	/******************** DIO PORTS *******************/
-	
-	/**
-	 * The DIO port value for the A channel of the encoder on the left portion of
-	 * the drive train.
-	 */
-	public static final int ENCODER_LEFT_CHANNEL_A = 0;
 
-	/**
-	 * The DIO port value for the B channel of the encoder on the left portion of
-	 * the drive train.
-	 */
-	public static final int ENCODER_LEFT_CHANNEL_B = 1;
+	/* TIMEOUTS */
 
-	/**
-	 * The DIO port value for the limit switch located at the top of the elevator.
-	 */
-	public static final int ELEVATOR_LIMIT_SWITCH_UP = 5;
 
-	/**
-	 * The DIO port value for the limit switch located at the bottom of the
-	 * elevator.
-	 */
-	public static final int ELEVATOR_LIMIT_SWITCH_DOWN = 4;
-
-	/******************** TIMEOUTS *******************/
-	
 	/**
 	 * The timeout used in shooting the intake out during autonomous.
 	 */
 	public static final double AUTO_OUTTAKE_TIMEOUT = 1;
-	
+
 	/**
 	 * The timeout used in picking up a cube during autonomous.
 	 */
@@ -143,24 +77,26 @@ public class RobotMap
 	 * The timeout used in moving the elevator back to default from the scale.
 	 */
 	public static final double ELEVATOR_TIMEOUT_SCALE_DOWN = 2.8;
-	
+
 	/**
 	 * The timeout used in moving the elevator back to default from the switch.
 	 */
 	public static final double ELEVATOR_TIMEOUT_SWITCH_DOWN = 50;
 
-	/******************** MOTOR SPEEDS *******************/
-	
+
+	/* MOTOR SPEEDS */
+
+
 	/**
 	 * The motor speed that correlates to driving the robot.
 	 */
 	public static final double MOTORSPEED_DRIVE = 0.3;
-	
+
 	/**
 	 * The motor speed that correlates to moving the elevator up.
 	 */
 	public static final double MOTORSPEED_ELEVATOR_UP = 0.8;
-	
+
 	/**
 	 * The motor speed that correlates to moving the elevator up auto.
 	 */
@@ -170,6 +106,7 @@ public class RobotMap
 	 * The motor speed that correlates to moving the elevator down.
 	 */
 	public static final double MOTORSPEED_ELEVATOR_DOWN = -.5;
+
 	/**
 	 * The motor speed that correlates to pulling in a box.
 	 */
@@ -215,83 +152,10 @@ public class RobotMap
 	 */
 	public static final double MOTORSPEED_TILTER_DOWN = -1.0;
 
-	/******************** JOYSTICK BUTTONS *******************/
-	
-	/**
-	 * The button that correlates to pulling in a box.
-	 */
-	public static final int BUTTON_INTAKE_IN = 7;
 
-	/**
-	 * The button that correlates to shooting out a box.
-	 */
-	public static final int BUTTON_INTAKE_OUT = 1;
+	/* PID VALUES */
 
-	/**
-	 * The button that correlates to shooting out a box slowly.
-	 */
-	public static final int BUTTON_INTAKE_SLOW = 2;
 
-	/**
-	 * The button that correlates to moving the elevator upward.
-	 */
-	public static final int BUTTON_ELEVATOR_UP = 5;
-
-	/**
-	 * The button that correlates to moving the elevator downward.
-	 */
-	public static final int BUTTON_ELEVATOR_DOWN = 3;
-
-	/**
-	 * The button that correlates to switching the tilt position of the intake.
-	 */
-	public static final int BUTTON_TOGGLE_TILTER = 8;
-
-	/**
-	 * The button that correlates to tilting the intake upward.
-	 */
-	public static final int BUTTON_TILTER_UP = 6;
-
-	/**
-	 * The button that correlates to tilting the intake downward.
-	 */
-	public static final int BUTTON_TILTER_DOWN = 4;
-
-	/**
-	 * The button that correlates to moving the elevator down manually without the
-	 * limit switch affecting it.
-	 */
-	public static final int BUTTON_ELEVATOR_DOWN_MANUAL = 11;
-
-	/******************** CONTROLLER PORTS *******************/
-	
-	/**
-	 * The port associated with the main joystick.
-	 */
-	public static final int JOYSTICK_PORT = 0;
-
-	/**
-	 * The port associated with a second joystick.
-	 */
-	public static final int ALT_JOYSTICK_PORT = 0;
-
-	/**
-	 * The mode designating that we are using one joystick.
-	 */
-	public static final int ONE_JOYSTICK = 0;
-
-	/**
-	 * The mode designating that we are using two joysticks.
-	 */
-	public static final int TWO_JOYSTICKS = 1;
-
-	/**
-	 * Stores what mode of controller use we are currently using.
-	 */
-	public static final int JOYSTICK_MODE = ONE_JOYSTICK;
-
-	/******************** PID VALUES *******************/
-	
 	/**
 	 * The update period used inside of the PIDControllers.
 	 */
@@ -327,7 +191,7 @@ public class RobotMap
 	 * The tolerance, in degrees, used while moving straight.
 	 */
 	public static final double PID_STRAIGHT_TOLERANCE = 3;
-	
+
 	/**
 	 * The tolerance, in inches, used when moving to a distance.
 	 */
@@ -393,8 +257,10 @@ public class RobotMap
 	 */
 	public static final double PID_TURN_D = 0.01;
 
-	/******************** INCREMENT *******************/
-	
+
+	/* INCREMENT */
+
+
 	/**
 	 * The linear increment used in PIDControllers.
 	 */
@@ -410,8 +276,10 @@ public class RobotMap
 	 */
 	public static final double DRIVE_SPEED_INCREMENT_VALUE = .01;
 
-	/******************** AUTO CHOOSER *******************/
-	
+
+	/* AUTO CHOOSER */
+
+
 	/**
 	 * The default option in the autonomous chooser.
 	 */
@@ -444,51 +312,11 @@ public class RobotMap
 	 * The scale selection for choosing the destination in the autonomous chooser.
 	 */
 	public static final int SCALE = 2;
-	
-	/******************** INTAKE **************************/
-	
-	/**
-	 * The motor bias for the left motor of the intake in the forward direction.
-	 */
-	public static final double LEFT_BIAS_FORWARD = 1;
-	
-	/**
-	 * The motor bias for the left motor of the intake in the backward direction.
-	 */
-	public static final double LEFT_BIAS_BACKWARD = 1;
-	
-	/**
-	 * The motor bias for the right motor of the intake in the forward direction.
-	 */
-	public static final double RIGHT_BIAS_FORWARD = 1;
-	
-	/**
-	 * The motor bias for the right motor of the intake in the backwards direction.
-	 */
-	public static final double RIGHT_BIAS_BACKWARD = 1;
 
-	/**
-	 * The motor offset for the left motor of the intake in the forward direction.
-	 */
-	public static final double LEFT_OFFSET_FORWARD = 0;
-	
-	/**
-	 * The motor offset for the left motor of the intake in the backward direction.
-	 */
-	public static final double LEFT_OFFSET_BACKWARD = 0;
-	
-	/**
-	 * The motor offset for the right motor of the intake in the forward direction.
-	 */
-	public static final double RIGHT_OFFSET_FORWARD = 0;
-	
-	/**
-	 * The motor offset for the right motor of the intake in the backwards direction.
-	 */
-	public static final double RIGHT_OFFSET_BACKWARD = 0;
-	
-	/******************** MISCELLANEOUS *******************/
-	
+
+	/* MISCELLANEOUS */
+
+
 	/**
 	 * The value used in PIDControllers to determine when to switch to using the PID
 	 * loop.
